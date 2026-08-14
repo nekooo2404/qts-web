@@ -1,0 +1,191 @@
+@import "tailwindcss";
+@import "flowbite/src/themes/default";
+@import "animate.css";
+@import "hover.css/css/hover-min.css";
+@import "../../tokens.css";
+
+@plugin "flowbite/plugin";
+@plugin "daisyui" {
+  themes: false;
+  logs: false;
+}
+@source "../../node_modules/flowbite";
+
+/* Hallmark · macrostructure: Workbench · tone: utilitarian · anchor hue: QTS navy
+ * theme: custom · vibe: "document control desk, precise, operational"
+ * axes: light / geometric-sans / cool · enrichment: none
+ * pre-emit critique: P4 H4 E4 S4 R5 V4 · contrast: pass (40-41)
+ * nav: N3 side rail · footer: none · slop: pass (42-49) · mobile: pass (34, 49-57)
+ */
+
+@theme inline {
+  --color-portal-brand: var(--color-brand);
+  --color-portal-highlight: var(--color-highlight);
+  --color-portal-warning: var(--color-warning-soft);
+  --color-portal-paper: var(--color-paper);
+  --color-portal-ink: var(--color-ink);
+  --font-sans: var(--font-ui);
+  --font-mono: var(--font-data);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+  overflow-x: clip;
+}
+
+body {
+  margin: 0;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  text-rendering: optimizeLegibility;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button,
+a,
+input,
+select,
+textarea,
+[tabindex]:not([tabindex="-1"]) {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+:focus-visible {
+  outline-color: var(--color-focus);
+}
+
+::selection {
+  background: var(--color-highlight);
+  color: var(--color-highlight-ink);
+}
+
+.portal-field {
+  min-height: 2.75rem;
+  width: 100%;
+  border: var(--rule-thin) solid var(--color-rule-strong);
+  border-radius: var(--radius-md);
+  background: var(--color-paper-raised);
+  color: var(--color-ink);
+  padding: 0.625rem 0.75rem;
+  transition:
+    background-color var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out);
+}
+
+.portal-field::placeholder {
+  color: var(--color-ink-muted);
+}
+
+.portal-field:hover {
+  background: var(--color-paper-muted);
+}
+
+.portal-field[aria-invalid="true"] {
+  border-color: var(--color-danger);
+}
+
+.portal-field:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.portal-btn {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  border-radius: var(--radius-md);
+  padding: 0.625rem 1rem;
+  font-weight: 650;
+  white-space: nowrap;
+  transition:
+    background-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out);
+}
+
+.portal-btn:active {
+  transform: translateY(1px);
+}
+
+.portal-btn:disabled,
+.portal-btn[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.portal-btn-primary {
+  border: var(--rule-thin) solid var(--color-brand);
+  background: var(--color-brand);
+  color: var(--color-brand-ink);
+}
+
+.portal-btn-primary:hover {
+  background: var(--color-brand-hover);
+}
+
+.portal-btn-secondary {
+  border: var(--rule-thin) solid var(--color-rule-strong);
+  background: var(--color-paper-raised);
+  color: var(--color-ink);
+}
+
+.portal-btn-secondary:hover {
+  background: var(--color-paper-muted);
+}
+
+.portal-surface {
+  border: var(--rule-thin) solid var(--color-rule);
+  border-radius: var(--radius-md);
+  background: var(--color-paper-raised);
+}
+
+.portal-data {
+  font-family: var(--font-data);
+  font-variant-numeric: tabular-nums;
+}
+
+.portal-table tbody tr {
+  transition: background-color var(--dur-fast) var(--ease-out);
+}
+
+.portal-table tbody tr:hover {
+  background: color-mix(in oklab, var(--color-highlight) 32%, transparent);
+}
+
+.portal-scrollbar {
+  scrollbar-color: var(--color-rule-strong) transparent;
+  scrollbar-width: thin;
+}
+
+dialog::backdrop {
+  background: color-mix(in oklab, var(--color-brand) 58%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

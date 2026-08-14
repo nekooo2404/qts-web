@@ -1,0 +1,330 @@
+openapi: 3.1.0
+info:
+  title: QTS Backend API
+  version: 1.0.0
+  description: Public website endpoints. Authenticated portal contracts are documented in SPEC.md.
+servers:
+  - url: http://localhost:4000
+paths:
+  /api/capabilities:
+    get:
+      summary: List published capabilities
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PageSize'
+      responses:
+        '200':
+          description: Published capability page
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/PaginatedResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Capability'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+  /api/projects:
+    get:
+      summary: List published projects
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - name: pageSize
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+            default: 12
+        - name: category
+          in: query
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 80
+      responses:
+        '200':
+          description: Published project page
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/PaginatedResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Project'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+  /api/projects/{id}:
+    get:
+      summary: Get one published project
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Published project
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [data]
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Project'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+  /api/solutions:
+    get:
+      summary: List published problem-to-solution entries
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PageSize'
+      responses:
+        '200':
+          description: Published solution page
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/PaginatedResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Solution'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+  /api/metrics:
+    get:
+      summary: List published company metrics
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PageSize'
+      responses:
+        '200':
+          description: Published metric page
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/PaginatedResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Metric'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+  /api/company-info:
+    get:
+      summary: Get current company information
+      responses:
+        '200':
+          description: Company information
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [data]
+                properties:
+                  data:
+                    $ref: '#/components/schemas/CompanyInfo'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/contact:
+    post:
+      summary: Submit a public contact lead
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContactInput'
+      responses:
+        '201':
+          description: Lead accepted and notification queued
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [data]
+                properties:
+                  data:
+                    $ref: '#/components/schemas/CreatedContactLead'
+        '400':
+          $ref: '#/components/responses/MalformedJson'
+        '413':
+          $ref: '#/components/responses/PayloadTooLarge'
+        '415':
+          $ref: '#/components/responses/UnsupportedMediaType'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+components:
+  parameters:
+    Page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    PageSize:
+      name: pageSize
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 50
+        default: 20
+  schemas:
+    Pagination:
+      type: object
+      required: [page, pageSize, totalItems, totalPages]
+      properties:
+        page: { type: integer, minimum: 1 }
+        pageSize: { type: integer, minimum: 1, maximum: 50 }
+        totalItems: { type: integer, minimum: 0 }
+        totalPages: { type: integer, minimum: 0 }
+    PaginatedResponse:
+      type: object
+      required: [data, pagination]
+      properties:
+        data: { type: array, items: {} }
+        pagination: { $ref: '#/components/schemas/Pagination' }
+    Capability:
+      type: object
+      additionalProperties: false
+      required: [id, title, description, iconUrl]
+      properties:
+        id: { type: string, format: uuid }
+        title: { type: string }
+        description: { type: string }
+        iconUrl: { type: [string, 'null'], format: uri }
+    Project:
+      type: object
+      additionalProperties: false
+      required: [id, title, description, imageUrl, category, publishedAt]
+      properties:
+        id: { type: string, format: uuid }
+        title: { type: string }
+        description: { type: string }
+        imageUrl: { type: string, format: uri }
+        category: { type: string }
+        publishedAt: { type: string, format: date-time }
+    Solution:
+      type: object
+      additionalProperties: false
+      required: [id, problem, solution, description]
+      properties:
+        id: { type: string, format: uuid }
+        problem: { type: string }
+        solution: { type: string }
+        description: { type: string }
+    Metric:
+      type: object
+      additionalProperties: false
+      required: [id, key, label, value, suffix]
+      properties:
+        id: { type: string, format: uuid }
+        key: { type: string }
+        label: { type: string }
+        value: { type: string }
+        suffix: { type: [string, 'null'] }
+    CompanyInfo:
+      type: object
+      additionalProperties: false
+      required: [about, vision, mission, address, hotline, updatedAt]
+      properties:
+        about: { type: string }
+        vision: { type: string }
+        mission: { type: string }
+        address: { type: string }
+        hotline: { type: string }
+        updatedAt: { type: string, format: date-time }
+    ContactInput:
+      type: object
+      additionalProperties: false
+      required: [customerName, phone, email, message]
+      properties:
+        customerName: { type: string, minLength: 2, maxLength: 120 }
+        phone:
+          type: string
+          description: Vietnamese local or explicit international number; stored as E.164.
+        email: { type: string, format: email, maxLength: 254 }
+        message: { type: string, minLength: 10, maxLength: 5000 }
+    CreatedContactLead:
+      type: object
+      additionalProperties: false
+      required: [id, status, createdAt]
+      properties:
+        id: { type: string, format: uuid }
+        status: { type: string, const: NEW }
+        createdAt: { type: string, format: date-time }
+    ApiError:
+      type: object
+      required: [error, requestId]
+      properties:
+        error:
+          type: object
+          required: [code, message]
+          properties:
+            code: { type: string }
+            message: { type: string }
+            details: {}
+        requestId: { type: string, format: uuid }
+  responses:
+    ValidationError:
+      description: Request validation failed
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ApiError' }
+    NotFound:
+      description: Resource was not found
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ApiError' }
+    MalformedJson:
+      description: Request body is malformed JSON
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ApiError' }
+    PayloadTooLarge:
+      description: Request body exceeds 16 KiB
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ApiError' }
+    UnsupportedMediaType:
+      description: Content-Type is not application/json
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ApiError' }
+    RateLimited:
+      description: Contact submission rate limit exceeded
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ApiError' }
+    ServiceUnavailable:
+      description: Contact persistence is temporarily unavailable
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ApiError' }

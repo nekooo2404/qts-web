@@ -1,0 +1,19 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: qts_public
+      POSTGRES_USER: qts_app
+      POSTGRES_PASSWORD: qts_local_development_only
+    ports:
+      - "5434:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U qts_app -d qts_public"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    volumes:
+      - qts_postgres_data:/var/lib/postgresql/data
+
+volumes:
+  qts_postgres_data:

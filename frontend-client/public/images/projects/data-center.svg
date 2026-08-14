@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-labelledby="data-center-title data-center-desc">
+  <title id="data-center-title">Resilient data center concept</title>
+  <desc id="data-center-desc">A symmetrical server hall with redundant availability routes, linked infrastructure, and a protected central data core.</desc>
+
+  <rect width="1600" height="1000" fill="#F8FAF7"/>
+  <path d="M0 0h1600v735L800 954 0 735V0Z" fill="#D0E6FD"/>
+  <path d="m0 735 800 219 800-219v265H0V735Z" fill="#F1E4D1"/>
+
+  <g fill="none" stroke="#162660" stroke-width="4" opacity="0.16">
+    <path d="M0 135h1600M0 270h1600M0 405h1600M0 540h1600M0 675h1600"/>
+    <path d="M135 0v772M355 0v832M575 0v892M1025 0v892M1245 0v832M1465 0v772"/>
+  </g>
+
+  <path d="M800 0v954" fill="none" stroke="#162660" stroke-width="5" stroke-dasharray="18 22" opacity="0.25"/>
+
+  <g stroke="#162660" stroke-width="7" stroke-linejoin="round">
+    <path d="M76 185h240v510L76 735V185Z" fill="#162660"/>
+    <path d="M316 185h250v468l-250 42V185Z" fill="#F8FAF7"/>
+    <path d="M1040 185h244v510l-244-42V185Z" fill="#F8FAF7"/>
+    <path d="M1284 185h240v550l-240-40V185Z" fill="#162660"/>
+    <path d="M381 236h239v409l-239 40V236Z" fill="#162660"/>
+    <path d="M980 236h239v449l-239-40V236Z" fill="#162660"/>
+  </g>
+
+  <g fill="#D0E6FD" stroke="#162660" stroke-width="5">
+    <path d="M101 219h190v69l-190 8v-77ZM101 322l190-9v69l-190 13v-73ZM101 421l190-15v69l-190 20v-74ZM101 521l190-21v69l-190 26v-74ZM101 621l190-28v69l-190 33v-74Z"/>
+    <path d="M1309 219h190v77l-190-8v-69ZM1309 313l190 9v73l-190-13v-69ZM1309 406l190 15v74l-190-20v-69ZM1309 500l190 21v74l-190-26v-69ZM1309 593l190 28v74l-190-33v-69Z"/>
+  </g>
+
+  <g fill="#F1E4D1" stroke="#162660" stroke-width="5">
+    <path d="M405 268h190v61l-190 8v-69ZM405 361l190-10v61l-190 14v-65ZM405 455l190-16v61l-190 20v-65ZM405 549l190-22v61l-190 26v-65Z"/>
+    <path d="M1005 268h190v69l-190-8v-61ZM1005 351l190 10v65l-190-14v-61ZM1005 439l190 16v65l-190-20v-61ZM1005 527l190 22v65l-190-26v-61Z"/>
+  </g>
+
+  <g fill="#162660">
+    <circle cx="132" cy="257" r="10"/><circle cx="132" cy="357" r="10"/><circle cx="132" cy="456" r="10"/><circle cx="132" cy="556" r="10"/><circle cx="132" cy="656" r="10"/>
+    <circle cx="1468" cy="257" r="10"/><circle cx="1468" cy="357" r="10"/><circle cx="1468" cy="456" r="10"/><circle cx="1468" cy="556" r="10"/><circle cx="1468" cy="656" r="10"/>
+  </g>
+  <g fill="#F8FAF7">
+    <circle cx="438" cy="303" r="10"/><circle cx="438" cy="395" r="10"/><circle cx="438" cy="489" r="10"/><circle cx="438" cy="582" r="10"/>
+    <circle cx="1162" cy="303" r="10"/><circle cx="1162" cy="395" r="10"/><circle cx="1162" cy="489" r="10"/><circle cx="1162" cy="582" r="10"/>
+  </g>
+
+  <g fill="none" stroke="#162660" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M196 154C370 58 568 56 734 150"/>
+    <path d="M1404 154C1230 58 1032 56 866 150"/>
+    <path d="M196 749c134 75 277 117 429 127"/>
+    <path d="M1404 749c-134 75-277 117-429 127"/>
+  </g>
+
+  <g fill="#F1E4D1" stroke="#162660" stroke-width="6">
+    <circle cx="196" cy="154" r="19"/><circle cx="734" cy="150" r="19"/>
+    <circle cx="1404" cy="154" r="19"/><circle cx="866" cy="150" r="19"/>
+    <circle cx="196" cy="749" r="19"/><circle cx="625" cy="876" r="19"/>
+    <circle cx="1404" cy="749" r="19"/><circle cx="975" cy="876" r="19"/>
+  </g>
+
+  <g transform="translate(800 432)">
+    <circle r="146" fill="#F8FAF7" stroke="#162660" stroke-width="8"/>
+    <path d="m0-94 87 48v96L0 98l-87-48v-96L0-94Z" fill="#D0E6FD" stroke="#162660" stroke-width="7" stroke-linejoin="round"/>
+    <path d="m-87-46 87 48 87-48M0 2v96" fill="none" stroke="#162660" stroke-width="7" stroke-linejoin="round"/>
+    <path d="m-44-70 87 48M-43-22 44 26M-43 26 44 74" fill="none" stroke="#F8FAF7" stroke-width="6" stroke-linecap="round"/>
+    <g fill="#F1E4D1" stroke="#162660" stroke-width="5">
+      <circle cx="-55" cy="-38" r="12"/><circle cx="-55" cy="10" r="12"/><circle cx="-55" cy="58" r="12"/>
+    </g>
+  </g>
+
+  <g fill="none" stroke="#162660" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M654 432h-42l-44-55"/>
+    <path d="M946 432h42l44-55"/>
+    <path d="M800 286v-76"/>
+    <path d="M800 578v85"/>
+  </g>
+  <g fill="#F8FAF7" stroke="#162660" stroke-width="6">
+    <circle cx="568" cy="377" r="17"/><circle cx="1032" cy="377" r="17"/>
+    <circle cx="800" cy="210" r="17"/><circle cx="800" cy="663" r="17"/>
+  </g>
+
+  <g stroke="#162660" stroke-width="7" stroke-linejoin="round">
+    <path d="m625 876 175-77 175 77-175 78-175-78Z" fill="#F8FAF7"/>
+    <path d="m800 799 175 77v69l-175-77v-69Z" fill="#D0E6FD"/>
+    <path d="m625 876 175 78v-86l-175-76v84Z" fill="#F1E4D1"/>
+  </g>
+
+  <g fill="none" stroke="#162660" stroke-width="6" stroke-linecap="round">
+    <path d="M694 849c60-57 153-57 212 0"/>
+    <path d="M728 864c41-37 103-37 144 0"/>
+  </g>
+  <circle cx="800" cy="875" r="17" fill="#162660"/>
+
+  <g fill="#162660" opacity="0.9">
+    <path d="M0 969h1600v31H0z"/>
+    <path d="M710 32h180v18H710z"/>
+  </g>
+</svg>

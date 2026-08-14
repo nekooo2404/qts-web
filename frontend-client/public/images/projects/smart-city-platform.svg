@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-labelledby="smart-city-title smart-city-desc">
+  <title id="smart-city-title">Connected smart city operations</title>
+  <desc id="smart-city-desc">An abstract cityscape with buildings, mobility systems, sensors, and data routes connected to a central operations hub.</desc>
+
+  <rect width="1600" height="1000" fill="#F8FAF7"/>
+  <path d="M0 0h1600v620L0 795V0Z" fill="#D0E6FD"/>
+  <path d="M0 795 1600 620v380H0V795Z" fill="#F1E4D1"/>
+
+  <g fill="none" stroke="#162660" stroke-width="3" opacity="0.16">
+    <path d="M0 147h1600M0 286h1600M0 425h1600"/>
+    <path d="M116 0v675M345 0v650M574 0v625M803 0v600M1032 0v575M1261 0v550M1490 0v525"/>
+  </g>
+
+  <g fill="#F8FAF7" stroke="#162660" stroke-width="6" stroke-linejoin="round">
+    <path d="m100 653 90-48 90 27v104l-180 25V653Z"/>
+    <path d="M160 616V422l67-26 67 26v292l-134 20V616Z"/>
+    <path d="M294 706V513l70-25 70 25v174l-140 21V706Z"/>
+    <path d="M434 685V350l88-37 88 37v309l-176 28V685Z"/>
+    <path d="M1057 604V376l83-34 83 34v205l-166 26V604Z"/>
+    <path d="M1223 578V465l70-25 70 25v91l-140 24V578Z"/>
+    <path d="M1363 555V300l76-31 76 31v230l-152 27V555Z"/>
+  </g>
+
+  <g fill="#162660">
+    <path d="M207 381h40v35h-40zM474 296h96v28h-96zM1104 323h72v36h-72zM1416 249h46v35h-46z"/>
+    <path d="M510 222h24v86h-24zM1427 189h24v93h-24z"/>
+  </g>
+
+  <g fill="#D0E6FD" stroke="#162660" stroke-width="4">
+    <path d="M183 459h25v39h-25zM246 459h25v39h-25zM183 529h25v39h-25zM246 529h25v39h-25zM183 599h25v39h-25zM246 599h25v39h-25z"/>
+    <path d="M325 550h27v37h-27zM377 550h27v37h-27zM325 614h27v37h-27zM377 614h27v37h-27z"/>
+    <path d="M470 390h31v40h-31zM542 390h31v40h-31zM470 467h31v40h-31zM542 467h31v40h-31zM470 544h31v40h-31zM542 544h31v40h-31z"/>
+    <path d="M1095 416h31v39h-31zM1154 416h31v39h-31zM1095 485h31v39h-31zM1154 485h31v39h-31z"/>
+    <path d="M1254 495h28v34h-28zM1304 495h28v34h-28z"/>
+    <path d="M1396 343h28v38h-28zM1454 343h28v38h-28zM1396 412h28v38h-28zM1454 412h28v38h-28zM1396 481h28v38h-28zM1454 481h28v38h-28z"/>
+  </g>
+
+  <g stroke="#162660" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M-38 890 570 702 1645 754" fill="none"/>
+    <path d="M42 1009 636 756 1560 866" fill="none"/>
+    <path d="M224 1009 690 802 1314 1009" fill="#D0E6FD"/>
+    <path d="m600 1000 186-145 203 145" fill="#F8FAF7"/>
+  </g>
+
+  <g fill="none" stroke="#F8FAF7" stroke-width="8" stroke-linecap="round" stroke-dasharray="42 32">
+    <path d="M34 906 582 738 1546 788"/>
+    <path d="M108 985 645 785 1430 897"/>
+  </g>
+
+  <g fill="#162660" stroke="#F8FAF7" stroke-width="5">
+    <path d="m258 834 82-28 70 17 13 39-145 36-37-14 17-50Z"/>
+    <circle cx="288" cy="888" r="18"/>
+    <circle cx="390" cy="862" r="18"/>
+    <path d="m1260 829 87 9 48 29-8 37-151-25-27-24 51-26Z"/>
+    <circle cx="1250" cy="881" r="18"/>
+    <circle cx="1364" cy="900" r="18"/>
+  </g>
+
+  <g fill="none" stroke="#162660" stroke-width="7" stroke-linecap="round">
+    <path d="M805 539C690 398 513 345 312 354"/>
+    <path d="M818 540c62-174 225-279 429-275"/>
+    <path d="M782 558C646 539 504 588 390 717"/>
+    <path d="M844 562c154-63 314-61 468 7"/>
+    <path d="M798 580c-72 132-69 253 12 364"/>
+    <path d="M837 581c63 102 145 171 255 204"/>
+  </g>
+
+  <g fill="#F1E4D1" stroke="#162660" stroke-width="6">
+    <circle cx="312" cy="354" r="18"/>
+    <circle cx="1247" cy="265" r="18"/>
+    <circle cx="390" cy="717" r="18"/>
+    <circle cx="1312" cy="569" r="18"/>
+    <circle cx="810" cy="944" r="18"/>
+    <circle cx="1092" cy="785" r="18"/>
+  </g>
+
+  <g transform="translate(818 559)">
+    <circle r="153" fill="#F8FAF7" stroke="#162660" stroke-width="8"/>
+    <circle r="116" fill="#162660"/>
+    <circle r="76" fill="#D0E6FD" stroke="#F8FAF7" stroke-width="7"/>
+    <circle r="24" fill="#F1E4D1" stroke="#162660" stroke-width="7"/>
+    <g fill="#F1E4D1" stroke="#162660" stroke-width="6">
+      <circle cx="0" cy="-116" r="17"/>
+      <circle cx="101" cy="-58" r="17"/>
+      <circle cx="101" cy="58" r="17"/>
+      <circle cx="0" cy="116" r="17"/>
+      <circle cx="-101" cy="58" r="17"/>
+      <circle cx="-101" cy="-58" r="17"/>
+    </g>
+    <g fill="none" stroke="#F8FAF7" stroke-width="6" stroke-linecap="round">
+      <path d="M0-74v50M64-37 21-12M64 37 21 12M0 74V24M-64 37-21 12M-64-37-21-12"/>
+    </g>
+  </g>
+
+  <g fill="#162660">
+    <path d="M86 685h52v52H86zM585 614h52v52h-52zM1006 567h52v52h-52zM1499 493h52v52h-52z"/>
+  </g>
+  <g fill="#F1E4D1">
+    <circle cx="112" cy="711" r="10"/>
+    <circle cx="611" cy="640" r="10"/>
+    <circle cx="1032" cy="593" r="10"/>
+    <circle cx="1525" cy="519" r="10"/>
+  </g>
+
+  <g fill="none" stroke="#162660" stroke-width="5" stroke-linecap="round">
+    <path d="M112 668v-76M86 616c15-15 37-15 52 0M68 591c25-25 63-25 88 0"/>
+    <path d="M611 598v-72M585 550c15-15 37-15 52 0M567 525c25-25 63-25 88 0"/>
+    <path d="M1032 551v-70M1006 505c15-15 37-15 52 0M988 480c25-25 63-25 88 0"/>
+    <path d="M1525 477v-70M1499 431c15-15 37-15 52 0M1481 406c25-25 63-25 88 0"/>
+  </g>
+
+  <g stroke="#162660" stroke-width="5" stroke-linejoin="round">
+    <path d="m702 922 90-45 90 45-90 44-90-44Z" fill="#D0E6FD"/>
+    <path d="m792 877 90 45v40l-90-44v-41Z" fill="#F8FAF7"/>
+    <path d="m702 922 90 45v-49l-90-43v47Z" fill="#F1E4D1"/>
+  </g>
+</svg>

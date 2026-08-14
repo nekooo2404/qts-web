@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">QTS</title>
+  <rect width="64" height="64" fill="#162660"/>
+  <path d="M18 18h28v22H35l9 8h-9l-9-8h-8V18Zm8 8v6h12v-6H26Z" fill="#F1E4D1"/>
+</svg>

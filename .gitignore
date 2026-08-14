@@ -1,0 +1,49 @@
+# impeccable-ignore-start
+# Ephemeral output, runtime state, and per-developer overrides.
+.impeccable/config.local.json
+.impeccable/hook.cache.json
+.impeccable/hook.pending.json
+.impeccable/*.png
+.impeccable/live/server.json
+.impeccable/live/sessions/
+.impeccable/live/previews/
+.impeccable/live/annotations/
+.impeccable/live/cache/
+.impeccable/live/manual-edit-apply-transaction.json
+.impeccable/live/manual-edit-events.jsonl
+.impeccable/live/manual-edit-evidence/
+.impeccable/live/pending-manual-edits.json
+.impeccable/live/deferred-svelte-component-accepts.json
+.impeccable/live/*.png
+# impeccable-ignore-end
+
+# Local agent and design-tool state.
+.agents/
+.codex/
+.hallmark/
+.impeccable/
+
+# Environment and secrets (keep safe examples only).
+.env
+.env.*
+!.env.example
+
+# Node/Next build output and local dependencies.
+**/node_modules/
+**/.next/
+**/out/
+**/dist/
+**/coverage/
+**/*.tsbuildinfo
+
+# Browser/test output and local logs.
+**/.playwright-cli/
+**/output/
+**/test-results/
+**/*.log
+
+# Editor and operating-system files.
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

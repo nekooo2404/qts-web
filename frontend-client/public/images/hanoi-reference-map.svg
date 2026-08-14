@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Schematic reference map for Hanoi</title>
+  <desc id="desc">An illustrative road and river field for broad Hanoi area reference. It does not identify an office location.</desc>
+  <rect width="1600" height="900" fill="#eef6ff"/>
+  <path d="M-80 180 C180 110 250 330 420 300 C600 268 640 80 840 154 C1050 232 1035 450 1220 430 C1400 410 1480 240 1700 300 L1700 520 C1450 470 1370 650 1160 612 C940 574 915 360 730 382 C510 408 470 570 270 526 C120 493 60 370 -80 420Z" fill="#d0e6fd"/>
+  <path d="M-40 205 C180 142 260 320 430 292 C600 262 650 116 830 176 C1030 242 1030 438 1210 418 C1400 396 1490 272 1650 310" fill="none" stroke="#ffffff" stroke-width="12" opacity=".8"/>
+  <g fill="#ffffff" stroke="#b8cbe0" stroke-width="3">
+    <path d="M80 110h250v140H80z"/><path d="M360 90h190v180H360z"/><path d="M585 110h245v150H585z"/>
+    <path d="M910 90h220v180H910z"/><path d="M1200 110h290v150H1200z"/>
+    <path d="M110 570h240v180H110z"/><path d="M410 600h220v155H410z"/><path d="M700 570h255v190H700z"/>
+    <path d="M1010 600h210v150h-210z"/><path d="M1280 560h260v195h-260z"/>
+  </g>
+  <g fill="none" stroke="#162660" stroke-linecap="round">
+    <path d="M0 430h1600" stroke-width="18" opacity=".78"/>
+    <path d="M300 0c70 170 60 320 0 470s-70 280 10 430" stroke-width="16" opacity=".7"/>
+    <path d="M850 0c-45 170-40 310 38 450s90 295 34 450" stroke-width="14" opacity=".62"/>
+    <path d="M0 760c290-75 475-80 720 10s500 65 880-25" stroke-width="12" opacity=".58"/>
+    <path d="M80 330c260 70 470 50 690-30s450-75 750 15" stroke-width="8" opacity=".45"/>
+    <path d="M160 120l1280 650M40 690l1320-590M520 20l520 820M1100 30L410 850" stroke-width="4" opacity=".32"/>
+  </g>
+  <g fill="#f1e4d1" stroke="#162660" stroke-width="4">
+    <path d="M615 340h150v92H615z"/><path d="M980 425h170v100H980z"/><path d="M380 430h120v78H380z"/>
+  </g>
+  <g fill="#162660" opacity=".72">
+    <circle cx="690" cy="385" r="12"/><circle cx="1065" cy="475" r="12"/><circle cx="440" cy="469" r="10"/>
+  </g>
+  <g fill="none" stroke="#0e193f" stroke-width="6" opacity=".7">
+    <circle cx="800" cy="450" r="112"/><circle cx="800" cy="450" r="145"/>
+  </g>
+  <g fill="#0e193f">
+    <path d="M1460 110h42v100h-42z"/><path d="M1425 145h112v30h-112z"/>
+  </g>
+  <g fill="#ffffff" font-family="Arial, sans-serif" font-size="24" font-weight="700" letter-spacing="3">
+    <text x="1390" y="255">N</text>
+  </g>
+</svg>

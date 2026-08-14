@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-labelledby="soc-title soc-desc">
+  <title id="soc-title">Security operations center concept</title>
+  <desc id="soc-desc">A security operations room with an incident wall, routed signals, analyst consoles, and a central protection node.</desc>
+
+  <rect width="1600" height="1000" fill="#F8FAF7"/>
+  <path d="M0 0h1600v718L0 838V0Z" fill="#D0E6FD"/>
+  <path d="M0 838 1600 718v282H0V838Z" fill="#F1E4D1"/>
+
+  <g fill="none" stroke="#162660" stroke-width="3" opacity="0.17">
+    <path d="M0 124h1600M0 248h1600M0 372h1600M0 496h1600M0 620h1600"/>
+    <path d="M134 0v765M358 0v748M582 0v731M806 0v714M1030 0v697M1254 0v680M1478 0v663"/>
+  </g>
+
+  <path d="M92 100h1416v560L92 767V100Z" fill="#162660"/>
+  <path d="M126 137h1348v488L126 719V137Z" fill="#F8FAF7" stroke="#162660" stroke-width="7"/>
+
+  <g stroke="#162660" stroke-width="7" stroke-linejoin="round">
+    <path d="M164 180h364v197H164z" fill="#D0E6FD"/>
+    <path d="M554 180h492v197H554z" fill="#F1E4D1"/>
+    <path d="M1072 180h364v197h-364z" fill="#D0E6FD"/>
+    <path d="M164 405h364v190H164z" fill="#F1E4D1"/>
+    <path d="M554 405h492v190H554z" fill="#D0E6FD"/>
+    <path d="M1072 405h364v190h-364z" fill="#F1E4D1"/>
+  </g>
+
+  <g fill="none" stroke="#162660" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="m192 334 55-58 49 31 55-79 57 45 92-56"/>
+    <path d="M587 321h88l44-62 77 33 53-76 67 49 100-43"/>
+    <path d="M1110 326c57-98 145-116 267-62"/>
+    <path d="m192 545 62-61 62 30 52-70 62 46 70-27"/>
+    <path d="M1110 540h68l42-78 63 50 50-66 66 27"/>
+  </g>
+
+  <g fill="#162660">
+    <circle cx="247" cy="276" r="13"/><circle cx="351" cy="228" r="13"/><circle cx="500" cy="217" r="13"/>
+    <circle cx="675" cy="321" r="13"/><circle cx="719" cy="259" r="13"/><circle cx="849" cy="216" r="13"/><circle cx="966" cy="222" r="13"/>
+    <circle cx="1178" cy="269" r="13"/><circle cx="1377" cy="264" r="13"/>
+    <circle cx="254" cy="484" r="13"/><circle cx="368" cy="444" r="13"/><circle cx="500" cy="463" r="13"/>
+    <circle cx="1178" cy="540" r="13"/><circle cx="1220" cy="462" r="13"/><circle cx="1333" cy="446" r="13"/><circle cx="1399" cy="473" r="13"/>
+  </g>
+
+  <g transform="translate(800 500)">
+    <circle r="84" fill="#F8FAF7" stroke="#162660" stroke-width="8"/>
+    <path d="M0-51 48-31v35c0 37-20 65-48 78-28-13-48-41-48-78v-35L0-51Z" fill="#162660" stroke="#162660" stroke-width="6"/>
+    <path d="m-22 4 15 16 32-38" fill="none" stroke="#F1E4D1" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <g fill="none" stroke="#162660" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M716 500H628l-54-56"/>
+    <path d="M884 500h91l51-58"/>
+    <path d="M800 416v-24"/>
+    <path d="M800 584v-24"/>
+  </g>
+  <g fill="#F8FAF7" stroke="#162660" stroke-width="6">
+    <circle cx="574" cy="444" r="17"/><circle cx="1026" cy="442" r="17"/>
+    <circle cx="800" cy="392" r="17"/><circle cx="800" cy="608" r="17"/>
+  </g>
+
+  <g stroke="#162660" stroke-width="7" stroke-linejoin="round">
+    <path d="m65 805 517-60 228 41-538 81-207-62Z" fill="#F8FAF7"/>
+    <path d="m1535 704-514 38-231 44 542-16 203-66Z" fill="#F8FAF7"/>
+    <path d="m272 867 538-81v70l-515 97-23-86Z" fill="#162660"/>
+    <path d="m790 786 542-16-28 83-514 3v-70Z" fill="#162660"/>
+  </g>
+
+  <g fill="#D0E6FD" stroke="#162660" stroke-width="6" stroke-linejoin="round">
+    <path d="m155 779 149-18 72 22-154 21-67-25Z"/>
+    <path d="m396 751 148-17 76 24-155 21-69-28Z"/>
+    <path d="m1045 754 152-11-70 25-156 7 74-21Z"/>
+    <path d="m1283 735 149-11-68 27-157 8 76-24Z"/>
+  </g>
+
+  <g fill="#162660">
+    <circle cx="337" cy="706" r="45"/>
+    <path d="M276 817c8-65 29-94 61-94s53 29 61 94h-122Z"/>
+    <circle cx="1254" cy="694" r="45"/>
+    <path d="M1193 801c8-65 29-94 61-94s53 29 61 94h-122Z"/>
+  </g>
+
+  <g fill="none" stroke="#162660" stroke-width="6" stroke-linecap="round">
+    <path d="M301 698c6-45 66-45 72 0"/>
+    <path d="M373 698v39M301 698v39"/>
+    <path d="M1218 686c6-45 66-45 72 0"/>
+    <path d="M1290 686v39M1218 686v39"/>
+  </g>
+
+  <g fill="#F1E4D1" stroke="#162660" stroke-width="6">
+    <circle cx="192" cy="334" r="16"/><circle cx="587" cy="321" r="16"/><circle cx="1110" cy="326" r="16"/>
+    <circle cx="192" cy="545" r="16"/><circle cx="1110" cy="540" r="16"/>
+  </g>
+
+  <g fill="#F8FAF7" opacity="0.9">
+    <path d="M112 116h218v12H112zM1270 116h218v12h-218z"/>
+  </g>
+</svg>

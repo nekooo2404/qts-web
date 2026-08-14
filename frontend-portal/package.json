@@ -1,0 +1,40 @@
+{
+  "name": "qts-internal-portal",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "@phosphor-icons/react": "2.1.10",
+    "animate.css": "4.1.1",
+    "daisyui": "5.7.16",
+    "docx": "9.7.1",
+    "flowbite": "4.0.2",
+    "geist": "latest",
+    "hover.css": "2.3.2",
+    "next": "16.3.0",
+    "react": "latest",
+    "react-dom": "latest",
+    "tailwindcss": "4.3.3"
+  },
+  "devDependencies": {
+    "@playwright/test": "latest",
+    "@tailwindcss/postcss": "4.3.3",
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "eslint": "latest",
+    "eslint-config-next": "16.3.0",
+    "typescript": "latest",
+    "vitest": "4.1.10"
+  }
+}
