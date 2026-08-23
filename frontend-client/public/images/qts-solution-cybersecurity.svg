@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">Cybersecurity operating flow</title>
+  <desc id="desc">Security events flow through SIEM, identity, orchestration, and network signals into operations.</desc>
+  <rect width="1200" height="620" fill="#f5f8fc"/>
+  <g stroke="#b8cbe0" stroke-width="1" opacity=".65"><path d="M0 124h1200M0 248h1200M0 372h1200M0 496h1200"/><path d="M200 0v620M400 0v620M600 0v620M800 0v620M1000 0v620"/></g>
+  <g fill="#0b1f5c" stroke="#5ea7ff" stroke-width="2">
+    <rect x="76" y="258" width="176" height="86"/><rect x="352" y="94" width="176" height="86"/><rect x="352" y="430" width="176" height="86"/>
+    <rect x="672" y="258" width="176" height="86"/><rect x="948" y="258" width="176" height="86"/>
+  </g>
+  <g fill="none" stroke="#123a9c" stroke-width="3"><path d="M252 301h90V137h10M252 301h90v172h10M528 137h96v164h48M528 473h96V301h48M848 301h100"/></g>
+  <g fill="none" stroke="#38d9ff" stroke-width="4" stroke-linecap="round" stroke-dasharray="3 16"><path d="M252 301h90V137h10M252 301h90v172h10M528 137h96v164h48M528 473h96V301h48M848 301h100"/></g>
+  <g fill="#ffffff" font-family="Arial, sans-serif" font-size="18" font-weight="700" text-anchor="middle"><text x="164" y="296">EVENTS</text><text x="164" y="321">SOURCE</text><text x="440" y="132">IDENTITY</text><text x="440" y="157">IAM</text><text x="440" y="468">ORCHESTRATE</text><text x="440" y="493">SOAR</text><text x="760" y="296">ANALYZE</text><text x="760" y="321">SIEM</text><text x="1036" y="296">OPERATIONS</text><text x="1036" y="321">RESPOND</text></g>
+  <g fill="#123a9c" font-family="Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="2"><text x="76" y="62">SECURITY / OPERATING FLOW</text><text x="948" y="62">TARGET / ≤15 MIN MTTA</text></g>
+  <circle cx="948" cy="301" r="7" fill="#38d9ff"/>
+</svg>

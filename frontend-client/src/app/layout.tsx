@@ -1,12 +1,19 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 
-import { SiteFooter } from "@/components/layout/site-footer";
-import { SiteHeader } from "@/components/layout/site-header";
+import Footer from "@/components/layout/site-footer";
+import Navbar from "@/components/layout/site-header";
+import { MobileContactBar } from "@/components/layout/mobile-contact-bar";
 import { ScrollAnimations } from "@/components/shared/scroll-animations";
 
-import "@fontsource-variable/inter";
+import "@fontsource/be-vietnam-pro/400.css";
+import "@fontsource/be-vietnam-pro/600.css";
+import "@fontsource/be-vietnam-pro/700.css";
+import "@fontsource/be-vietnam-pro/800.css";
+import "@fontsource-variable/sora";
 import "./globals.css";
+import "./system-redesign.css";
+import "./precision-system.css";
 
 export const metadata: Metadata = {
   title: {
@@ -21,21 +28,21 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#162660",
+  themeColor: "#07143d",
 };
 
 const designContract = `<!--
-THESIS: QTS turns operational problems into systems that can be implemented and improved; refuse the generic centered corporate hero.
-OWN-WORLD: QTS blue structural fields, pale signal blue, warm paper markers, square geometry, precise linework.
-STORY: Understand the problem, see the delivery method, inspect capabilities and sample work, then start a project conversation.
-FIRST VIEWPORT: A full-bleed systems field carries the offer and CTA, while the delivery workflow remains visible below the fold.
-FORM: Narrative Workflow, direction seed QTS-NW-162660.
+THESIS: QTS makes architecture visible and operable; refuse the headline-plus-blob corporate template.
+OWN-WORLD: QTS navy fields, pale blueprint surfaces, electric-cyan signals, one-pixel topology, and square operational modules.
+STORY: See the live system, trace QTS capabilities through it, inspect technical proof, then submit an engineering brief.
+FIRST VIEWPORT: The offer owns the left half; an interactive Business-Data-Integration-Security-Operations topology owns the right with status and live signal paths.
+FORM: Data-center patch-panel topology, assigned direction 05, seed f2d4079d.
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
 -->`;
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (
-    <html lang="vi">
+    <html lang="vi" data-scroll-behavior="smooth">
       <body>
         <template
           data-qts-design-contract
@@ -43,14 +50,15 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
         />
         <a
           href="#main-content"
-          className="fixed left-3 top-3 z-50 -translate-y-24 bg-qts-accent px-4 py-3 font-semibold text-qts-deep focus:translate-y-0"
+          className="fixed left-3 top-3 z-[70] -translate-y-24 bg-qts-accent px-4 py-3 font-semibold text-qts-deep focus:translate-y-0"
         >
           Bỏ qua điều hướng
         </a>
-        <SiteHeader />
-        <main id="main-content">{children}</main>
-        <SiteFooter />
+        <Navbar />
         <ScrollAnimations />
+        <div id="main-content">{children}</div>
+        <Footer />
+        <MobileContactBar />
       </body>
     </html>
   );

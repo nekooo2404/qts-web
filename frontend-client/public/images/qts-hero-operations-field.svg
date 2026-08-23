@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">QTS operational system field</title>
+  <desc id="desc">A restrained technical field showing a connected globe, system nodes, and operational signals.</desc>
+  <rect width="1600" height="900" fill="#07143d" fill-opacity=".18"/>
+  <g fill="none" stroke="#78c4ff" stroke-opacity=".18" stroke-width="1">
+    <ellipse cx="1190" cy="438" rx="310" ry="310"/>
+    <ellipse cx="1190" cy="438" rx="310" ry="138"/>
+    <ellipse cx="1190" cy="438" rx="138" ry="310"/>
+    <path d="M880 438h620M904 320h572M904 556h572"/>
+    <path d="M1190 128v620M1072 145c74 96 112 194 118 293 6 99 44 197 118 293M1308 145c-74 96-112 194-118 293-6 99-44 197-118 293"/>
+  </g>
+  <g fill="none" stroke="#5ea7ff" stroke-width="2" stroke-opacity=".62">
+    <path d="M90 690H420V580H690"/>
+    <path d="M430 168h190"/>
+    <path d="M820 740h160"/>
+    <path d="M1270 210h190"/>
+    <path d="M1290 638h170"/>
+  </g>
+  <g fill="#38d9ff">
+    <circle cx="420" cy="690" r="6"/>
+    <circle cx="604" cy="168" r="6"/>
+    <circle cx="980" cy="648" r="6"/>
+    <circle cx="1460" cy="210" r="6"/>
+    <circle cx="1460" cy="638" r="6"/>
+    <circle cx="1190" cy="438" r="9"/>
+  </g>
+  <g fill="none" stroke="#38d9ff" stroke-width="3" stroke-linecap="round" stroke-dasharray="2 14" opacity=".7">
+    <path d="M220 690H420"/>
+    <path d="M590 168h70"/>
+    <path d="M980 648h54"/>
+    <path d="M1460 210h16"/>
+  </g>
+  <text x="1040" y="830" fill="#78c4ff" font-family="Arial, sans-serif" font-size="16" font-weight="700" letter-spacing="3">QTS / OPERATIONAL FIELD</text>
+</svg>

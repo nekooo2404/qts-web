@@ -1,78 +1,150 @@
 import type { Metadata } from "next";
+import { Check } from "@phosphor-icons/react/dist/ssr";
+import Image from "next/image";
 
 import { PageIntro } from "@/components/shared/page-intro";
-import { capabilities, capabilityIcons, workflow } from "@/data/site-content";
+import { capabilityIcons } from "@/data/site-content";
+import { getCapabilities } from "@/lib/public-api";
 
 export const metadata: Metadata = {
   title: "Năng lực",
-  description: "Các nhóm năng lực công nghệ và mạch triển khai tham chiếu của QTS.",
+  description: "Bốn lớp năng lực của QTS từ kiến trúc, tích hợp, an toàn thông tin đến vận hành hệ thống.",
 };
 
-export default function CapabilitiesPage() {
+const qualityGates = [
+  { code: "G1", title: "Ranh giới", description: "Phạm vi, phụ thuộc và trách nhiệm được xác định." },
+  { code: "G2", title: "Kiến trúc", description: "Luồng dữ liệu, kiểm soát và tiêu chí nghiệm thu được thống nhất." },
+  { code: "G3", title: "Chuyển đổi", description: "Mỗi thay đổi có kịch bản kiểm thử và phương án quay lui." },
+  { code: "G4", title: "Vận hành", description: "Khả năng quan sát và quy trình xử lý được bàn giao cùng hệ thống." },
+] as const;
+
+export default async function CapabilitiesPage() {
+  const capabilityItems = await getCapabilities();
   return (
-    <>
+    <main>
       <PageIntro
-        title="Năng lực kết nối từ kiến trúc đến vận hành."
-        description="Bốn nhóm chuyên môn được tổ chức quanh một mục tiêu chung: biến nhu cầu vận hành thành hệ thống có cấu trúc, có thể triển khai và tiếp tục cải tiến."
-        aside={<p>Nội dung hiện được lấy từ dữ liệu seed của API và cần được QTS xác nhận trước khi công bố chính thức.</p>}
+        variant="capabilities"
+        title="QTS System. Bốn lớp, một vòng vận hành."
+        description="Kiến trúc, tích hợp, an toàn thông tin và vận hành dùng chung một bản đồ hệ thống, cùng chịu các cổng kiểm soát."
       />
 
-      <section className="page-shell py-16 sm:py-20 lg:py-24" aria-labelledby="capability-list-title">
-        <h2 id="capability-list-title" className="sr-only">
-          Các nhóm năng lực
-        </h2>
-        <div className="grid gap-5 md:grid-cols-2">
-          {capabilities.map((capability, index) => {
-            const Icon = capabilityIcons[capability.iconKey];
-
-            return (
-              <article
-                key={capability.id}
-                className={`hvr-float min-w-0 border border-qts-border p-6 sm:p-8 ${
-                  index === 0 ? "bg-qts-primary text-white md:row-span-2 md:flex md:flex-col md:justify-between" : "bg-white"
-                }`}
-              >
-                <div className="flex items-start justify-between gap-6">
-                  <span className={`text-sm font-semibold ${index === 0 ? "text-qts-secondary" : "text-qts-primary"}`}>
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <Icon size={32} weight="duotone" aria-hidden="true" />
-                </div>
-                <div className={index === 0 ? "mt-16 md:mt-32" : "mt-12"}>
-                  <h3 className={`display-wrap text-xl font-semibold leading-tight sm:text-2xl ${index === 0 ? "text-white" : "text-qts-deep"}`}>
-                    {capability.title}
-                  </h3>
-                  <p className={`mt-4 text-sm leading-6 sm:text-base sm:leading-7 ${index === 0 ? "text-qts-secondary" : "text-qts-muted"}`}>
-                    {capability.description}
-                  </p>
-                </div>
-              </article>
-            );
-          })}
-        </div>
-      </section>
-
-      <section className="border-y border-qts-border bg-qts-soft" aria-labelledby="delivery-flow-title">
-        <div className="page-shell py-16 sm:py-20">
-          <div className="max-w-2xl">
-            <h2 id="delivery-flow-title" className="text-2xl font-semibold text-qts-deep sm:text-3xl">
-              Mạch triển khai tham chiếu
+      <section className="capability-stack-section py-16 sm:py-20 lg:py-28" aria-labelledby="capability-stack-title">
+        <div className="page-shell">
+          <div className="grid gap-6 border-b border-qts-border pb-8 lg:grid-cols-12 lg:items-end" data-reveal>
+            <h2 id="capability-stack-title" className="display-wrap text-3xl font-bold leading-tight text-qts-deep sm:text-4xl lg:col-span-7 lg:text-5xl">
+              Từ quyết định kiến trúc đến đầu ra bàn giao.
             </h2>
-            <p className="mt-4 leading-7 text-qts-muted">
-              Một trình tự làm việc dự kiến để các nhóm năng lực không vận hành tách rời nhau.
+            <p className="body-wrap text-base leading-7 text-qts-muted lg:col-span-4 lg:col-start-9">
+              Mỗi lớp có phạm vi riêng nhưng dùng chung một bản đồ hệ thống và cùng chịu các cổng kiểm soát.
             </p>
           </div>
-          <ol className="mt-10 grid gap-0 border-t border-qts-border md:grid-cols-4">
-            {workflow.map((step, index) => (
-              <li key={step.title} className="border-b border-qts-border py-7 md:border-b-0 md:border-r md:px-6 md:first:pl-0 md:last:border-r-0">
-                <span className="text-xs font-semibold text-qts-primary">0{index + 1}</span>
-                <h3 className="mt-4 font-semibold text-qts-deep">{step.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-qts-muted">{step.description}</p>
-              </li>
-            ))}
+
+          <figure className="capability-blueprint" data-reveal="capability-blueprint">
+            <Image
+              src="/images/qts-capability-blueprint.svg"
+              alt="Blueprint bốn lớp năng lực QTS từ kiến trúc đến vận hành"
+              width={1200}
+              height={540}
+              sizes="(min-width: 1024px) 1200px, 100vw"
+              priority
+              unoptimized
+            />
+            <figcaption>
+              <span>QTS / CAPABILITY BLUEPRINT</span>
+              <span>BOUNDARIES / HANDOFF / OPERATIONS</span>
+            </figcaption>
+          </figure>
+
+          <ol className="capability-stack">
+            {capabilityItems.map((capability, index) => {
+              const Icon = capabilityIcons[capability.iconKey];
+              const titleId = `${capability.id}-title`;
+              const scopeId = `${capability.id}-scope`;
+              const outputId = `${capability.id}-output`;
+              const current = String(index + 1).padStart(2, "0");
+              const total = String(capabilityItems.length).padStart(2, "0");
+              return (
+                <li key={capability.id} className="capability-stack__item">
+                  <article
+                    id={capability.id}
+                    aria-labelledby={titleId}
+                    className="capability-layer scroll-mt-24"
+                    data-reveal="capability-layer"
+                  >
+                    <div className="capability-layer__identity">
+                      <p className="capability-layer__count">
+                        <span className="sr-only">Lớp {index + 1} trên {capabilityItems.length}</span>
+                        <strong aria-hidden="true">{current}</strong>
+                        <span aria-hidden="true">/ {total}</span>
+                      </p>
+                      <span className="capability-layer__icon" aria-hidden="true">
+                        <Icon size={27} weight="regular" />
+                      </span>
+                      <span className="capability-layer__code">{capability.iconKey}</span>
+                    </div>
+
+                    <div className="capability-layer__summary">
+                      <h3 id={titleId} className="display-wrap">{capability.title}</h3>
+                      <p className="body-wrap">{capability.description}</p>
+                    </div>
+
+                    <div className="capability-layer__list-group capability-layer__list-group--scope" aria-labelledby={scopeId}>
+                      <h4 id={scopeId}>Phạm vi</h4>
+                      <ul className="capability-layer__list">
+                        {capability.scope.map((item) => (
+                          <li key={item}>
+                            <Check size={16} weight="bold" aria-hidden="true" />
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div className="capability-layer__list-group capability-layer__list-group--output" aria-labelledby={outputId}>
+                      <h4 id={outputId}>Đầu ra</h4>
+                      <ul className="capability-layer__list">
+                        {capability.outputs.map((item) => (
+                          <li key={item}>
+                            <Check size={16} weight="bold" aria-hidden="true" />
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </article>
+                </li>
+              );
+            })}
           </ol>
         </div>
       </section>
-    </>
+
+      <section className="qts-dark bg-qts-deep py-16 text-white sm:py-20 lg:py-24">
+        <div className="page-shell" data-reveal>
+          <div className="grid gap-8 lg:grid-cols-12">
+            <div className="lg:col-span-4">
+              <p className="text-sm font-bold uppercase text-qts-accent">Cổng kiểm soát</p>
+              <h2 className="display-wrap mt-3 text-3xl font-bold leading-tight sm:text-4xl">
+                Không chuyển bước chỉ vì công việc “đã xong”.
+              </h2>
+              <p className="body-wrap mt-5 text-base leading-7 text-qts-secondary">
+                Mỗi giai đoạn cần một bằng chứng đủ rõ để đội tiếp theo có thể tiếp tục mà không phải đoán.
+              </p>
+            </div>
+            <ol className="border-y border-white/25 lg:col-span-7 lg:col-start-6">
+              {qualityGates.map((gate) => (
+                <li key={gate.code} className="grid gap-4 border-b border-white/20 py-6 last:border-b-0 sm:grid-cols-[3rem_minmax(0,1fr)]">
+                  <span className="text-sm font-bold text-qts-accent">{gate.code}</span>
+                  <div>
+                    <h3 className="font-bold text-white">{gate.title}</h3>
+                    <p className="body-wrap mt-2 text-sm leading-6 text-white/65">{gate.description}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
+      </section>
+    </main>
   );
 }

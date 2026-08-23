@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">Data platform decision flow</title>
+  <desc id="desc">Data sources move through a governed data platform into APIs and decision products.</desc>
+  <rect width="1200" height="620" fill="#f5f8fc"/>
+  <g stroke="#b8cbe0" stroke-width="1" opacity=".65"><path d="M0 124h1200M0 248h1200M0 372h1200M0 496h1200"/><path d="M200 0v620M400 0v620M600 0v620M800 0v620M1000 0v620"/></g>
+  <g fill="#0b1f5c" stroke="#5ea7ff" stroke-width="2"><rect x="70" y="238" width="172" height="110"/><rect x="342" y="238" width="172" height="110"/><rect x="614" y="238" width="172" height="110"/><rect x="886" y="150" width="220" height="92"/><rect x="886" y="378" width="220" height="92"/></g>
+  <g fill="none" stroke="#123a9c" stroke-width="3"><path d="M242 293h100M514 293h100M786 293h100V196M786 293h100v131"/></g><g fill="none" stroke="#38d9ff" stroke-width="4" stroke-linecap="round" stroke-dasharray="3 16"><path d="M242 293h100M514 293h100M786 293h100V196M786 293h100v131"/></g>
+  <g fill="#ffffff" font-family="Arial, sans-serif" font-size="18" font-weight="700" text-anchor="middle"><text x="156" y="281">SOURCES</text><text x="156" y="307">DATA</text><text x="428" y="281">LAKE</text><text x="428" y="307">GOVERN</text><text x="700" y="281">API</text><text x="700" y="307">SERVE</text><text x="996" y="188">DECISIONS</text><text x="996" y="214">PRODUCTS</text><text x="996" y="416">OPERATIONS</text><text x="996" y="442">INSIGHT</text></g>
+  <g fill="#123a9c" font-family="Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="2"><text x="70" y="62">DATA / PLATFORM MODEL</text><text x="886" y="540">TARGET / 08 DATA DOMAINS</text></g>
+  <circle cx="886" cy="293" r="7" fill="#38d9ff"/>
+</svg>

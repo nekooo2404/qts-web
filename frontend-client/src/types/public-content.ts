@@ -2,14 +2,21 @@ export interface PublicCapability {
   id: string;
   title: string;
   description: string;
-  iconUrl: string | null;
+  scope: string[];
+  outputs: string[];
 }
 
 export interface PublicSolution {
   id: string;
   problem: string;
-  solution: string;
-  description: string;
+  architecture: string[];
+  desiredState: string;
+}
+
+export interface TechnicalMetric {
+  label: string;
+  value: string;
+  kind: "scope" | "target";
 }
 
 export interface PublicProject {
@@ -19,13 +26,17 @@ export interface PublicProject {
   imageUrl: string;
   imageAlt: string;
   category: string;
-  publishedAt: string;
-  filterClass: "mayfair" | "reyes" | "hudson";
+  scope: string[];
+  metrics: TechnicalMetric[];
+  technologies: string[];
 }
 
 export interface PublicCompanyInfo {
+  about: string;
   vision: string;
   mission: string;
   address: string;
   hotline: string;
+  email: string;
+  hours: string;
 }

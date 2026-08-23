@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 420" role="img" aria-labelledby="title desc">
+  <title id="title">QTS engineering intake topology</title>
+  <desc id="desc">A four-step intake path from problem through discovery and architecture into operations.</desc>
+  <rect width="1200" height="420" fill="#eaf2fb"/>
+  <g stroke="#b8cbe0" stroke-width="1" opacity=".65"><path d="M0 84h1200M0 168h1200M0 252h1200M0 336h1200"/><path d="M120 0v420M240 0v420M360 0v420M480 0v420M600 0v420M720 0v420M840 0v420M960 0v420M1080 0v420"/></g>
+  <g fill="#ffffff" stroke="#123a9c" stroke-width="2"><rect x="72" y="150" width="214" height="120"/><rect x="342" y="150" width="214" height="120"/><rect x="612" y="150" width="214" height="120"/><rect x="882" y="150" width="246" height="120"/></g>
+  <g stroke="#0b1f5c" stroke-width="3"><path d="M286 210h56M556 210h56M826 210h56"/></g><g stroke="#38d9ff" stroke-width="4" stroke-linecap="round" stroke-dasharray="3 14"><path d="M286 210h56M556 210h56M826 210h56"/></g>
+  <g fill="#123a9c" font-family="Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="2"><text x="96" y="184">01</text><text x="366" y="184">02</text><text x="636" y="184">03</text><text x="906" y="184">04</text></g>
+  <g fill="#0b1f5c" font-family="Arial, sans-serif" font-size="22" font-weight="700"><text x="96" y="224">PROBLEM</text><text x="366" y="224">DISCOVERY</text><text x="636" y="224">ARCHITECTURE</text><text x="906" y="224">OPERATIONS</text></g>
+  <g fill="#52627a" font-family="Arial, sans-serif" font-size="13"><text x="96" y="250">Context / scale / constraint</text><text x="366" y="250">Evidence / boundary / risk</text><text x="636" y="250">Layers / controls / roadmap</text><text x="906" y="250">Observe / respond / improve</text></g>
+  <text x="72" y="92" fill="#123a9c" font-family="Arial, sans-serif" font-size="14" font-weight="700" letter-spacing="3">ENGINEERING INTAKE / SYSTEM SCOPE</text>
+  <circle cx="882" cy="210" r="7" fill="#38d9ff"/>
+</svg>

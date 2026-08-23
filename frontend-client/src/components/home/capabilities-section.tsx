@@ -2,57 +2,61 @@ import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 import Link from "next/link";
 
 import { capabilities, capabilityIcons } from "@/data/site-content";
+import type { PublicCapability } from "@/types/public-content";
 
-const cardStyles = [
-  "bg-qts-deep text-white lg:col-span-7",
-  "bg-qts-secondary text-qts-deep lg:col-span-5",
-  "bg-qts-accent text-qts-deep lg:col-span-5",
-  "bg-qts-surface text-qts-deep lg:col-span-7",
-] as const;
+interface CapabilitiesSectionProps {
+  items?: Array<PublicCapability & { iconKey: keyof typeof capabilityIcons }>;
+}
 
-export function CapabilitiesSection() {
+export function CapabilitiesSection({ items = capabilities }: CapabilitiesSectionProps) {
   return (
-    <section id="nang-luc" className="bg-qts-soft py-16 sm:py-20 lg:py-28">
-      <div className="page-shell" data-animate="animate__fadeInUp">
-        <div className="flex flex-col gap-6 border-b border-qts-border pb-8 md:flex-row md:items-end md:justify-between">
-          <div>
-            <p className="text-sm font-bold uppercase text-qts-primary">Năng lực cốt lõi</p>
-            <h2 className="display-wrap mt-3 max-w-3xl text-3xl font-bold leading-tight text-qts-deep sm:text-4xl lg:text-5xl">
-              Bốn lớp năng lực, cùng phục vụ một hệ thống thống nhất.
+    <section id="nang-luc" className="capabilities-section bg-qts-soft py-16 sm:py-20 lg:py-28">
+      <div className="page-shell" data-reveal="capabilities-section">
+        <div className="grid gap-6 border-b border-qts-border pb-8 lg:grid-cols-12 lg:items-end">
+          <div className="lg:col-span-8">
+            <p className="text-sm font-bold uppercase text-qts-primary">Bản đồ năng lực</p>
+            <h2 className="display-wrap mt-3 text-3xl font-bold leading-tight text-qts-deep sm:text-4xl lg:text-5xl">
+              Bốn lớp cùng hội tụ vào một hệ thống có thể vận hành.
             </h2>
           </div>
           <Link
             href="/nang-luc"
-            className="inline-flex min-h-11 items-center gap-2 self-start border-b-2 border-qts-primary pb-1 font-semibold text-qts-primary md:self-auto"
+            className="inline-flex min-h-11 items-center gap-2 border-b-2 border-qts-primary pb-1 font-bold text-qts-primary lg:col-span-3 lg:col-start-10 lg:justify-self-end"
           >
-            Khám phá năng lực
+            Xem chi tiết
             <ArrowUpRight size={19} weight="bold" aria-hidden="true" />
           </Link>
         </div>
 
-        <div className="mt-8 grid gap-4 lg:grid-cols-12">
-          {capabilities.map((capability, index) => {
+        <div className="capability-system-map">
+          <div className="capability-system-map__core" aria-hidden="true">
+            <span>QTS</span>
+            <strong>System</strong>
+            <i />
+          </div>
+          <ol className="capability-system-map__layers">
+          {items.map((capability, index) => {
             const Icon = capabilityIcons[capability.iconKey];
-            const mutedText = index === 0 ? "text-qts-secondary" : "text-qts-muted";
-
             return (
-              <article
-                key={capability.id}
-                className={`hvr-float min-h-64 w-full border border-qts-border/70 p-7 shadow-[var(--shadow-raised)] sm:p-9 ${cardStyles[index]}`}
-              >
-                <div className="flex items-start justify-between gap-4">
-                  <Icon size={36} weight="duotone" aria-hidden="true" />
-                  <span className="text-sm font-bold opacity-60">0{index + 1}</span>
-                </div>
-                <h3 className="display-wrap mt-12 max-w-xl text-2xl font-bold leading-tight">
-                  {capability.title}
-                </h3>
-                <p className={`mt-4 max-w-xl text-sm leading-7 ${mutedText}`}>
-                  {capability.description}
-                </p>
-              </article>
+              <li key={capability.id} data-reveal="capability-card">
+                <Link
+                  href={`/nang-luc#${capability.id}`}
+                  aria-label={`Xem chi tiết: ${capability.title}`}
+                  className="capability-system-map__layer"
+                >
+                  <span className="capability-system-map__index">L{String(index + 1).padStart(2, "0")}</span>
+                  <span className="capability-system-map__icon" aria-hidden="true"><Icon size={26} weight="regular" /></span>
+                  <span className="capability-system-map__copy">
+                    <strong>{capability.title}</strong>
+                    <small>{capability.description}</small>
+                  </span>
+                  <ArrowUpRight size={20} weight="bold" aria-hidden="true" />
+                  <i aria-hidden="true" />
+                </Link>
+              </li>
             );
           })}
+          </ol>
         </div>
       </div>
     </section>

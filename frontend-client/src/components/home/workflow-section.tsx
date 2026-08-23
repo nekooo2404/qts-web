@@ -1,34 +1,45 @@
+import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
+
 import { workflow } from "@/data/site-content";
 
 export function WorkflowSection() {
   return (
-    <section id="phuong-phap" className="bg-qts-paper py-14 sm:py-16 lg:py-20">
-      <div className="page-shell" data-animate="animate__fadeInUp">
+    <section id="phuong-phap" className="workflow-section py-16 sm:py-20 lg:py-28">
+      <div className="page-shell" data-reveal="workflow-section">
         <div className="grid gap-6 lg:grid-cols-12 lg:items-end">
-          <h2 className="display-wrap text-3xl font-bold leading-tight text-qts-deep sm:text-4xl lg:col-span-6 lg:text-5xl">
-            Một lộ trình xuyên suốt, từ hiện trạng đến vận hành.
+          <h2 className="display-wrap text-3xl font-bold leading-tight text-qts-deep sm:text-4xl lg:col-span-7 lg:text-5xl">
+            Từ hiện trạng đến vận hành: một chuỗi quyết định có kiểm soát.
           </h2>
-          <p className="max-w-xl text-base leading-7 text-qts-muted lg:col-span-5 lg:col-start-8">
-            QTS tiếp cận hệ thống theo chuỗi quyết định có thể kiểm tra, để kiến trúc và
-            triển khai cùng hướng về mục tiêu vận hành.
+          <p className="body-wrap text-base leading-7 text-qts-muted lg:col-span-4 lg:col-start-9">
+            Mỗi giai đoạn tạo ra đầu ra có thể kiểm tra trước khi hệ thống chuyển sang bước tiếp theo.
           </p>
         </div>
 
-        <ol className="mt-12 grid border-t border-qts-border md:grid-cols-2 lg:grid-cols-4">
+        <ol className="workflow-journey">
           {workflow.map((step, index) => {
             const Icon = step.icon;
-
             return (
               <li
                 key={step.title}
-                className="border-b border-qts-border py-8 md:px-6 md:odd:border-r lg:border-b-0 lg:border-r lg:px-7 lg:first:pl-0 lg:last:border-r-0 lg:last:pr-0"
+                className={`workflow-step${index === 0 ? " is-active" : ""}`}
+                data-reveal="workflow-step"
+                data-story-row="workflow"
               >
-                <div className="flex items-center justify-between text-qts-primary">
-                  <span className="text-sm font-bold">0{index + 1}</span>
-                  <Icon size={28} weight="duotone" aria-hidden="true" />
+                <span className="workflow-step__number">
+                  <span className="sr-only">Bước </span>
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <span className="workflow-step__marker" aria-hidden="true" />
+                <Icon className="workflow-step__icon" size={32} weight="light" aria-hidden="true" />
+                <h3 className="workflow-step__title display-wrap">{step.title}</h3>
+                <p className="workflow-step__description body-wrap">{step.description}</p>
+                <div className="workflow-step__deliverable">
+                  <div className="workflow-step__deliverable-heading">
+                    <span className="workflow-step__deliverable-label">Đầu ra</span>
+                    <ArrowRight size={16} weight="bold" aria-hidden="true" />
+                  </div>
+                  <strong>{step.deliverable}</strong>
                 </div>
-                <h3 className="display-wrap mt-8 text-xl font-bold text-qts-deep">{step.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-qts-muted">{step.description}</p>
               </li>
             );
           })}

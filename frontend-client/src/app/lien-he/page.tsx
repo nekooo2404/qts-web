@@ -1,120 +1,141 @@
-import { ArrowSquareOut, MapPin, Phone } from "@phosphor-icons/react/dist/ssr";
 import type { Metadata } from "next";
 import Image from "next/image";
+import {
+  ArrowSquareOut,
+  CheckCircle,
+  Clock,
+  EnvelopeSimple,
+  MapPin,
+  Phone,
+  ShieldCheck,
+  Timer,
+} from "@phosphor-icons/react/dist/ssr";
 
 import { ContactForm } from "@/components/contact/contact-form";
-import { companyInfo } from "@/data/site-content";
+import { getCompanyInfo } from "@/lib/public-api";
+
+const supportEmail = "support@qts.com.vn";
 
 export const metadata: Metadata = {
-  title: "Liên hệ",
-  description:
-    "Gửi yêu cầu tư vấn cho QTS về hạ tầng số, tích hợp hệ thống, an toàn thông tin và vận hành công nghệ.",
+  title: "Trao đổi với QTS",
+  description: "Bắt đầu từ bài toán cần được giải quyết và gửi phạm vi hệ thống cho đội ngũ QTS.",
 };
 
-const openStreetMapViewUrl =
-  "https://www.openstreetmap.org/#map=10/21.0500/105.8250";
-
-export default function ContactPage() {
+export default async function ContactPage() {
+  const companyInfo = await getCompanyInfo();
   return (
-    <div className="bg-qts-paper">
-      <section className="border-b border-qts-border bg-qts-secondary/55">
-        <div className="page-shell grid gap-10 py-12 lg:grid-cols-[minmax(0,0.78fr)_minmax(36rem,1.22fr)] lg:items-start lg:gap-14 lg:py-20">
-          <div className="animate__animated animate__fadeInUp lg:sticky lg:top-28">
-            <p className="text-xs font-bold uppercase text-qts-primary">Liên hệ QTS</p>
-            <h1 className="display-wrap mt-4 max-w-xl text-4xl font-extrabold leading-tight text-qts-deep sm:text-5xl lg:text-6xl">
-              Bắt đầu từ bài toán đang cần giải quyết.
+    <main className="contact-page">
+      <section className="contact-section bg-qts-paper pb-16 sm:pb-20 lg:pb-28" aria-labelledby="contact-title">
+        <div className="page-shell">
+          <header className="contact-page__header" data-reveal>
+            <p className="contact-eyebrow">Trao đổi với QTS</p>
+            <h1 id="contact-title" className="display-wrap contact-page__title">
+              Bắt đầu từ bài toán cần được giải quyết.
             </h1>
-            <p className="mt-6 max-w-xl text-base leading-8 text-qts-muted sm:text-lg">
-              Chia sẻ mục tiêu, hiện trạng hoặc điểm nghẽn của hệ thống. Biểu mẫu bên cạnh
-              sẽ chuyển yêu cầu trực tiếp tới dịch vụ liên hệ của QTS.
+            <p className="body-wrap contact-page__intro">
+              Bài toán, quy mô và bối cảnh vận hành tạo thành đầu vào cho cuộc trao đổi kỹ thuật đầu tiên.
             </p>
+          </header>
 
-            <div className="mt-9 grid border-y border-qts-border sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
-              <div className="flex min-w-0 gap-4 py-5 sm:border-r sm:border-qts-border sm:pr-5 lg:border-r-0 lg:pr-0 xl:border-r xl:pr-5">
-                <MapPin
-                  size={24}
-                  weight="duotone"
-                  className="mt-0.5 shrink-0 text-qts-primary"
-                  aria-hidden="true"
-                />
-                <div className="min-w-0">
-                  <p className="text-xs font-bold uppercase text-qts-muted">Khu vực trong seed</p>
-                  <p className="display-wrap mt-2 font-semibold text-qts-deep">
-                    {companyInfo.address}
-                  </p>
-                </div>
-              </div>
+          <div className="contact-layout grid gap-10 lg:grid-cols-12 lg:items-start">
+          <aside className="contact-aside lg:col-span-4" data-reveal>
+            <div className="contact-aside__header">
+              <p className="contact-eyebrow">Thông tin trao đổi</p>
+              <p className="contact-aside__intro">Hotline, email và địa chỉ làm việc của QTS.</p>
+            </div>
 
-              <div className="flex min-w-0 gap-4 border-t border-qts-border py-5 sm:border-t-0 sm:pl-5 lg:border-t lg:pl-0 xl:border-t-0 xl:pl-5">
-                <Phone
-                  size={24}
-                  weight="duotone"
-                  className="mt-0.5 shrink-0 text-qts-primary"
-                  aria-hidden="true"
-                />
-                <div className="min-w-0">
-                  <p className="text-xs font-bold uppercase text-qts-muted">Hotline trong seed</p>
-                  <p className="display-wrap mt-2 font-semibold text-qts-deep">
-                    {companyInfo.hotline}
-                  </p>
-                </div>
+            <div className="contact-detail contact-detail--interactive">
+              <span className="contact-detail__icon" aria-hidden="true">
+                <Phone size={19} weight="regular" />
+              </span>
+              <div>
+                <p className="contact-detail__label">Hotline</p>
+                <a className="contact-detail__value" href={`tel:${companyInfo.hotline}`}>
+                  +84 24 7300 0888
+                </a>
               </div>
             </div>
 
-            <div className="mt-6 border border-qts-border bg-qts-accent p-4 text-sm leading-6 text-qts-deep">
-              Địa chỉ và hotline trên là dữ liệu seed của backend, chưa có nguồn xác minh độc
-              lập. Không nên dùng như thông tin văn phòng chính thức trước khi QTS xác nhận.
+            <div className="contact-detail contact-detail--interactive">
+              <span className="contact-detail__icon" aria-hidden="true">
+                <EnvelopeSimple size={19} weight="regular" />
+              </span>
+              <div>
+                <p className="contact-detail__label">Email hỗ trợ</p>
+                <a className="contact-detail__value contact-detail__value--email" href={`mailto:${supportEmail}`}>
+                  {supportEmail}
+                </a>
+              </div>
             </div>
-          </div>
 
-          <div className="animate__animated animate__fadeInUp [animation-delay:120ms]">
+            <div className="contact-detail">
+              <span className="contact-detail__icon" aria-hidden="true">
+                <MapPin size={19} weight="regular" />
+              </span>
+              <div>
+                <p className="contact-detail__label">Văn phòng</p>
+                <p className="contact-detail__value">{companyInfo.address}</p>
+                <p className="contact-detail__meta">{companyInfo.hours}</p>
+                <a
+                  className="contact-map-link"
+                  href={`https://www.openstreetmap.org/search?query=${encodeURIComponent(companyInfo.address)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Xem trên bản đồ
+                  <ArrowSquareOut size={16} weight="bold" aria-hidden="true" />
+                </a>
+              </div>
+            </div>
+
+            <div className="contact-detail">
+              <span className="contact-detail__icon" aria-hidden="true">
+                <Clock size={19} weight="regular" />
+              </span>
+              <div>
+                <p className="contact-detail__label">Thời gian phản hồi</p>
+                <p className="contact-detail__value">Trong vòng 24 giờ làm việc</p>
+              </div>
+            </div>
+
+            <ul className="contact-trust" aria-label="Cam kết hỗ trợ">
+              <li className="contact-trust__item">
+                <ShieldCheck size={18} weight="regular" aria-hidden="true" />
+                <span>Bảo mật thông tin</span>
+              </li>
+              <li className="contact-trust__item">
+                <Timer size={18} weight="regular" aria-hidden="true" />
+                <span>Phản hồi trong 24h</span>
+              </li>
+              <li className="contact-trust__item">
+                <CheckCircle size={18} weight="regular" aria-hidden="true" />
+                <span>Tư vấn miễn phí ban đầu</span>
+              </li>
+            </ul>
+
+            <figure className="contact-aside__visual">
+              <Image
+                src="/images/qts-intake-topology.svg"
+                alt="Sơ đồ quy trình trao đổi từ bài toán đến vận hành"
+                width={1200}
+                height={420}
+                sizes="(min-width: 1024px) 420px, 100vw"
+                unoptimized
+              />
+              <figcaption>PROBLEM / DISCOVERY / ARCHITECTURE / OPERATIONS</figcaption>
+            </figure>
+
+            <div className="contact-privacy">
+              <p>Vì an toàn thông tin, vui lòng không gửi mật khẩu, khóa truy cập hoặc dữ liệu bí mật qua biểu mẫu này.</p>
+            </div>
+          </aside>
+
+          <div className="contact-form-column lg:col-span-7 lg:col-start-6" data-reveal>
             <ContactForm />
           </div>
-        </div>
-      </section>
-
-      <section aria-labelledby="contact-map-title" className="bg-qts-deep text-white">
-        <div className="page-shell grid gap-8 py-12 lg:grid-cols-[minmax(0,1.45fr)_minmax(20rem,0.55fr)] lg:items-center lg:gap-12 lg:py-16">
-          <div className="relative overflow-hidden border border-white/25 bg-white">
-            <Image
-              src="/images/hanoi-reference-map.svg"
-              alt="Sơ đồ tham chiếu minh họa phạm vi Hà Nội, không đánh dấu văn phòng cụ thể"
-              loading="lazy"
-              fill
-              sizes="(min-width: 1024px) 60vw, 100vw"
-              className="object-cover"
-            />
-            <div className="aspect-[4/3] sm:aspect-[16/8] lg:aspect-[16/9]" aria-hidden="true" />
-          </div>
-
-          <div>
-            <p className="text-xs font-bold uppercase text-qts-secondary">Phạm vi tham chiếu</p>
-            <h2
-              id="contact-map-title"
-              className="display-wrap mt-3 text-3xl font-bold leading-tight text-white sm:text-4xl"
-            >
-              Bản đồ tổng quan Hà Nội
-            </h2>
-            <p className="mt-5 text-sm leading-7 text-white/75">
-              Backend hiện chỉ ghi địa chỉ ở cấp thành phố là “{companyInfo.address}”. Vì dữ
-              liệu chưa đủ chi tiết, bản đồ chỉ hiển thị phạm vi rộng và không đặt marker văn
-              phòng cụ thể.
-            </p>
-            <p className="mt-3 text-xs leading-5 text-white/60">
-              Sơ đồ nền là hình minh họa tham chiếu; mở OpenStreetMap để xem bản đồ trực tiếp.
-            </p>
-            <a
-              href={openStreetMapViewUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="mt-7 inline-flex min-h-11 items-center gap-2 border-b-2 border-qts-accent pb-1 font-semibold text-white transition-colors hover:text-qts-secondary"
-            >
-              Mở bản đồ OpenStreetMap
-              <ArrowSquareOut size={18} weight="bold" aria-hidden="true" />
-            </a>
           </div>
         </div>
       </section>
-    </div>
+    </main>
   );
 }

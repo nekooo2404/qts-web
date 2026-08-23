@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 540" role="img" aria-labelledby="title desc">
+  <title id="title">QTS capability blueprint</title>
+  <desc id="desc">Four connected capability layers from architecture through operations with a central control spine.</desc>
+  <rect width="1200" height="540" fill="#eaf2fb"/>
+  <g stroke="#123a9c" stroke-opacity=".12" stroke-width="1">
+    <path d="M0 90h1200M0 180h1200M0 270h1200M0 360h1200M0 450h1200"/>
+    <path d="M120 0v540M240 0v540M360 0v540M480 0v540M600 0v540M720 0v540M840 0v540M960 0v540M1080 0v540"/>
+  </g>
+  <path d="M120 92V448" stroke="#0b1f5c" stroke-width="3"/>
+  <circle cx="120" cy="270" r="44" fill="#0b1f5c" stroke="#38d9ff" stroke-width="3"/>
+  <text x="120" y="264" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="2">QTS</text>
+  <text x="120" y="286" text-anchor="middle" fill="#78c4ff" font-family="Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="1">SYSTEM</text>
+  <g fill="#ffffff" stroke="#b8cbe0" stroke-width="1">
+    <rect x="220" y="54" width="840" height="82"/>
+    <rect x="220" y="164" width="840" height="82"/>
+    <rect x="220" y="274" width="840" height="82"/>
+    <rect x="220" y="384" width="840" height="82"/>
+  </g>
+  <g fill="#1e40af" font-family="Arial, sans-serif" font-weight="700">
+    <text x="252" y="88" font-size="12" letter-spacing="2">L01</text>
+    <text x="252" y="198" font-size="12" letter-spacing="2">L02</text>
+    <text x="252" y="308" font-size="12" letter-spacing="2">L03</text>
+    <text x="252" y="418" font-size="12" letter-spacing="2">L04</text>
+  </g>
+  <g fill="#0b1f5c" font-family="Arial, sans-serif" font-size="23" font-weight="700">
+    <text x="320" y="101">ARCHITECTURE</text>
+    <text x="320" y="211">INTEGRATION</text>
+    <text x="320" y="321">SECURITY</text>
+    <text x="320" y="431">OPERATIONS</text>
+  </g>
+  <g fill="#52627a" font-family="Arial, sans-serif" font-size="13">
+    <text x="704" y="101">Boundaries / target state / roadmap</text>
+    <text x="704" y="211">API / middleware / data flow</text>
+    <text x="704" y="321">Identity / monitoring / response</text>
+    <text x="704" y="431">Observability / incident / improvement</text>
+  </g>
+  <g stroke="#38d9ff" stroke-width="3" fill="#38d9ff">
+    <path d="M164 95h56M164 205h56M164 315h56M164 425h56"/>
+    <circle cx="220" cy="95" r="5"/><circle cx="220" cy="205" r="5"/><circle cx="220" cy="315" r="5"/><circle cx="220" cy="425" r="5"/>
+  </g>
+  <text x="220" y="508" fill="#123a9c" font-family="Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="2">ARCHITECTURE LOOP / CONTROLLED HANDOFF</text>
+</svg>

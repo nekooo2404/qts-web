@@ -1,35 +1,66 @@
 import type { Metadata } from "next";
 
 import { PageIntro } from "@/components/shared/page-intro";
-import { SolutionAccordion } from "@/components/solutions/solution-accordion";
+import { ProblemExplorer } from "@/components/solutions/solution-accordion";
+import { getSolutions } from "@/lib/public-api";
 
 export const metadata: Metadata = {
   title: "Giải pháp",
-  description: "Các cặp vấn đề và hướng giải pháp công nghệ trong dữ liệu tham chiếu của QTS.",
+  description: "Các hướng kiến trúc của QTS cho an toàn thông tin, hạ tầng số và nền tảng dữ liệu.",
 };
 
-export default function SolutionsPage() {
+const deliveryPath = [
+  ["01", "Bài toán", "Xác định điểm nghẽn, ràng buộc và trạng thái cần đạt."],
+  ["02", "Kiến trúc", "Sắp xếp các lớp hệ thống, luồng dữ liệu và điểm kiểm soát."],
+  ["03", "Kế hoạch", "Chia phạm vi thành các mốc có tiêu chí nghiệm thu rõ ràng."],
+  ["04", "Vận hành", "Đưa khả năng quan sát và xử lý sự cố vào ngay từ thiết kế."],
+] as const;
+
+export default async function SolutionsPage() {
+  const solutions = await getSolutions();
   return (
-    <>
+    <main>
       <PageIntro
-        title="Bắt đầu từ vấn đề, không bắt đầu từ sản phẩm."
-        description="Mỗi hướng giải pháp được đặt cạnh bài toán vận hành tương ứng để giữ cho quyết định công nghệ có mục tiêu rõ ràng."
-        aside={<p>Các mô tả đang ở mức định hướng từ dữ liệu seed; phạm vi, kiến trúc và tiêu chí nghiệm thu cần được xác lập theo từng dự án.</p>}
+        variant="solutions"
+        title="Từ điểm nghẽn đến kiến trúc có thể vận hành."
+        description="QTS không bắt đầu bằng danh mục công nghệ. Mỗi hướng giải pháp bắt đầu từ vấn đề, đi qua kiến trúc và kết thúc ở trạng thái cần đạt."
       />
-      <section className="page-shell py-16 sm:py-20 lg:py-24" aria-labelledby="solution-map-title">
-        <div className="mb-10 grid gap-5 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end">
-          <div>
-            <h2 id="solution-map-title" className="text-2xl font-semibold text-qts-deep sm:text-3xl">
-              Bản đồ vấn đề → giải pháp
+
+      <section className="bg-qts-paper py-16 sm:py-20 lg:py-28">
+        <div className="page-shell" data-reveal>
+          <div className="grid gap-6 pb-10 lg:grid-cols-12 lg:items-end">
+            <h2 className="display-wrap text-3xl font-bold leading-tight text-qts-deep sm:text-4xl lg:col-span-7 lg:text-5xl">
+              Ba cấu trúc cho ba nhóm điểm nghẽn thường gặp.
             </h2>
-            <p className="mt-3 max-w-2xl leading-7 text-qts-muted">
-              Mở từng mục để xem hướng xử lý đang được đề xuất.
+            <p className="body-wrap text-base leading-7 text-qts-muted lg:col-span-4 lg:col-start-9">
+              Mở từng hồ sơ để xem luồng kiến trúc và trạng thái vận hành mà thiết kế hướng đến.
             </p>
           </div>
-          <p className="text-sm font-semibold text-qts-primary">03 hướng tham chiếu</p>
+          <ProblemExplorer items={solutions} />
         </div>
-        <SolutionAccordion />
       </section>
-    </>
+
+      <section className="border-y border-qts-border bg-qts-soft py-16 sm:py-20">
+        <div className="page-shell" data-reveal>
+          <div className="grid gap-8 lg:grid-cols-12">
+            <div className="lg:col-span-4">
+              <p className="text-sm font-bold uppercase text-qts-primary">Đường triển khai</p>
+              <h2 className="display-wrap mt-3 text-3xl font-bold leading-tight text-qts-deep sm:text-4xl">
+                Một giải pháp chỉ hoàn chỉnh khi có đường đi vào vận hành.
+              </h2>
+            </div>
+            <ol className="border-y border-qts-border lg:col-span-7 lg:col-start-6">
+              {deliveryPath.map(([code, title, description]) => (
+                <li key={code} className="grid gap-4 border-b border-qts-border py-6 last:border-b-0 sm:grid-cols-[3rem_9rem_minmax(0,1fr)]">
+                  <span className="text-sm font-bold text-qts-primary">{code}</span>
+                  <h3 className="font-bold text-qts-deep">{title}</h3>
+                  <p className="body-wrap text-sm leading-6 text-qts-muted">{description}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
+      </section>
+    </main>
   );
 }

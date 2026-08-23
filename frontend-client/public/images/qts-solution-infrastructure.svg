@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">Infrastructure integration flow</title>
+  <desc id="desc">Infrastructure sources connect through a platform layer, automation, and service observability.</desc>
+  <rect width="1200" height="620" fill="#f5f8fc"/>
+  <g stroke="#b8cbe0" stroke-width="1" opacity=".65"><path d="M0 124h1200M0 248h1200M0 372h1200M0 496h1200"/><path d="M200 0v620M400 0v620M600 0v620M800 0v620M1000 0v620"/></g>
+  <g fill="#ffffff" stroke="#123a9c" stroke-width="2"><rect x="76" y="220" width="190" height="180"/><rect x="360" y="220" width="190" height="180"/><rect x="644" y="220" width="190" height="180"/><rect x="928" y="220" width="190" height="180"/></g>
+  <g stroke="#0b1f5c" stroke-width="2" fill="#eaf2fb"><rect x="112" y="258" width="118" height="20"/><rect x="112" y="292" width="118" height="20"/><rect x="112" y="326" width="118" height="20"/><rect x="396" y="258" width="118" height="20"/><rect x="396" y="292" width="118" height="20"/><rect x="396" y="326" width="118" height="20"/></g>
+  <g fill="none" stroke="#123a9c" stroke-width="3"><path d="M266 310h94M550 310h94M834 310h94"/></g><g fill="none" stroke="#38d9ff" stroke-width="4" stroke-linecap="round" stroke-dasharray="3 16"><path d="M266 310h94M550 310h94M834 310h94"/></g>
+  <g fill="#0b1f5c" font-family="Arial, sans-serif" font-size="18" font-weight="700" text-anchor="middle"><text x="171" y="235">LEGACY</text><text x="171" y="375">WORKLOADS</text><text x="455" y="235">PLATFORM</text><text x="455" y="375">STANDARDIZE</text><text x="739" y="235">AUTOMATE</text><text x="739" y="375">CHANGE</text><text x="1023" y="235">OBSERVE</text><text x="1023" y="375">SERVICE</text></g>
+  <g fill="#123a9c" font-family="Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="2"><text x="76" y="62">INFRASTRUCTURE / READINESS MODEL</text><text x="928" y="62">TARGET / RTO ≤60 MIN</text></g>
+  <circle cx="928" cy="310" r="7" fill="#38d9ff"/>
+</svg>

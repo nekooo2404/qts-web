@@ -1,30 +1,36 @@
 import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 import Link from "next/link";
 
-import { companyInfo } from "@/data/site-content";
+const proof = [
+  ["01", "Phạm vi được kiểm chứng", "Architecture, integration và operations được thiết kế như một hệ thống."],
+  ["02", "Ranh giới rõ ràng", "Biên hệ thống, phụ thuộc và trách nhiệm được xác lập trước khi triển khai."],
+  ["03", "Vận hành được", "Observability, incident response và thay đổi nằm trong cùng thiết kế."],
+  ["04", "Đo lường được", "Mỗi giai đoạn có đầu ra, cổng kiểm soát và tiêu chí chuyển bước."],
+] as const;
 
 export function HomeClosing() {
   return (
-    <section className="bg-qts-accent py-16 sm:py-20">
-      <div
-        className="page-shell grid gap-8 lg:grid-cols-12 lg:items-end"
-        data-animate="animate__fadeInUp"
-      >
-        <div className="lg:col-span-8">
-          <h2 className="display-wrap text-3xl font-bold leading-tight text-qts-deep sm:text-4xl lg:text-5xl">
-            Công nghệ chỉ có ý nghĩa khi tạo ra thay đổi trong vận hành.
-          </h2>
-          <p className="mt-5 max-w-3xl text-base leading-7 text-qts-muted">
-            {companyInfo.mission}
-          </p>
+    <section className="why-qts bg-qts-paper" aria-labelledby="why-qts-title">
+      <div className="page-shell" data-reveal>
+        <div className="why-qts__head">
+          <div>
+            <h2 id="why-qts-title">Why QTS</h2>
+            <p>Công nghệ chỉ có ý nghĩa khi làm cho vận hành rõ ràng hơn.</p>
+          </div>
+          <Link href="/#phuong-phap">
+            Cách QTS làm việc
+            <ArrowUpRight size={19} weight="bold" aria-hidden="true" />
+          </Link>
         </div>
-        <Link
-          href="/gioi-thieu"
-          className="inline-flex min-h-12 items-center gap-2 self-start border-b-2 border-qts-deep pb-1 font-semibold text-qts-deep lg:col-span-3 lg:col-start-10 lg:self-end lg:justify-self-end"
-        >
-          Câu chuyện QTS
-          <ArrowUpRight size={20} weight="bold" aria-hidden="true" />
-        </Link>
+        <ol className="why-qts__proof">
+          {proof.map(([code, title, description]) => (
+            <li key={code}>
+              <span>{code}</span>
+              <h3>{title}</h3>
+              <p>{description}</p>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
   );

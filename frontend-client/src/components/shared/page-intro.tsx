@@ -1,28 +1,23 @@
-import type { ReactNode } from "react";
+import { RouteSystemVisual, type RouteVisualVariant } from "@/components/shared/route-system-visual";
 
 interface PageIntroProps {
   title: string;
   description: string;
-  aside?: ReactNode;
+  variant: RouteVisualVariant;
 }
-
-export function PageIntro({ title, description, aside }: PageIntroProps) {
+export function PageIntro({ title, description, variant }: PageIntroProps) {
   return (
-    <section className="border-b border-qts-border bg-qts-soft">
-      <div className="page-shell grid gap-10 py-16 sm:py-20 lg:grid-cols-[minmax(0,2fr)_minmax(16rem,1fr)] lg:items-end lg:py-24">
-        <div className="animate__animated animate__fadeInUp max-w-4xl">
-          <h1 className="display-wrap text-4xl font-semibold leading-[1.05] text-qts-deep sm:text-5xl lg:text-6xl">
+    <section className={`route-intro route-intro--${variant} qts-dark bg-qts-deep`}>
+      <div className="page-shell route-intro__grid">
+        <div className="route-intro__copy">
+          <h1 className="display-wrap route-intro__title">
             {title}
           </h1>
-          <p className="mt-6 max-w-3xl text-base leading-7 text-qts-muted sm:text-lg sm:leading-8">
+          <p className="body-wrap route-intro__description">
             {description}
           </p>
         </div>
-        {aside ? (
-          <div className="border-l-2 border-qts-primary pl-5 text-sm leading-6 text-qts-muted">
-            {aside}
-          </div>
-        ) : null}
+        <RouteSystemVisual variant={variant} />
       </div>
     </section>
   );
