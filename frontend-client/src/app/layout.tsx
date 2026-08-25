@@ -1,52 +1,81 @@
 import type { Metadata, Viewport } from "next";
+import { Be_Vietnam_Pro, Lora, Sora } from "next/font/google";
 import type { ReactNode } from "react";
 
 import Footer from "@/components/layout/site-footer";
 import Navbar from "@/components/layout/site-header";
 import { MobileContactBar } from "@/components/layout/mobile-contact-bar";
-import { ScrollAnimations } from "@/components/shared/scroll-animations";
+import { ClientTelemetry } from "@/components/telemetry/client-telemetry";
+import { createPageMetadata, getSiteUrl } from "@/lib/seo";
 
-import "@fontsource/be-vietnam-pro/400.css";
-import "@fontsource/be-vietnam-pro/600.css";
-import "@fontsource/be-vietnam-pro/700.css";
-import "@fontsource/be-vietnam-pro/800.css";
-import "@fontsource-variable/sora";
 import "./globals.css";
 import "./system-redesign.css";
 import "./precision-system.css";
+import "./modern-saas.css";
+
+const bodyFont = Be_Vietnam_Pro({
+  weight: ["400", "600", "700", "800"],
+  subsets: ["latin", "vietnamese"],
+  display: "swap",
+  variable: "--font-be-vietnam-pro",
+});
+
+const displayFont = Sora({
+  weight: "variable",
+  subsets: ["latin", "latin-ext"],
+  display: "swap",
+  variable: "--font-sora",
+});
+
+const editorialFont = Lora({
+  weight: "variable",
+  style: ["normal", "italic"],
+  subsets: ["latin", "vietnamese"],
+  display: "swap",
+  variable: "--font-lora",
+});
+
+const baseMetadata = createPageMetadata({
+  title: "QTS | Kiến tạo hệ thống số cho doanh nghiệp",
+  description: "QTS đồng hành cùng doanh nghiệp từ bài toán vận hành đến kiến trúc, triển khai và cải tiến hệ thống số.",
+  path: "/",
+});
 
 export const metadata: Metadata = {
+  ...baseMetadata,
+  metadataBase: getSiteUrl(),
+  applicationName: "QTS Technology Solutions",
+  category: "technology",
   title: {
     default: "QTS | Kiến tạo hệ thống số cho doanh nghiệp",
     template: "%s | QTS",
   },
-  description:
-    "QTS đồng hành cùng doanh nghiệp từ bài toán vận hành đến kiến trúc, triển khai và cải tiến hệ thống số.",
+  icons: { icon: "/icon.svg" },
 };
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#07143d",
+  themeColor: "#f5f8fd",
 };
 
-const designContract = `<!--
-THESIS: QTS makes architecture visible and operable; refuse the headline-plus-blob corporate template.
-OWN-WORLD: QTS navy fields, pale blueprint surfaces, electric-cyan signals, one-pixel topology, and square operational modules.
-STORY: See the live system, trace QTS capabilities through it, inspect technical proof, then submit an engineering brief.
-FIRST VIEWPORT: The offer owns the left half; an interactive Business-Data-Integration-Security-Operations topology owns the right with status and live signal paths.
-FORM: Data-center patch-panel topology, assigned direction 05, seed f2d4079d.
-FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
--->`;
-
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
+  const siteUrl = getSiteUrl();
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "QTS Technology Solutions",
+    url: siteUrl.origin,
+    email: "support@qts.com.vn",
+    logo: new URL("icon.svg", siteUrl).toString(),
+  };
   return (
-    <html lang="vi" data-scroll-behavior="smooth">
-      <body>
-        <template
-          data-qts-design-contract
-          dangerouslySetInnerHTML={{ __html: designContract }}
+    <html lang="vi" dir="ltr" data-scroll-behavior="smooth">
+      <body className={`${bodyFont.variable} ${displayFont.variable} ${editorialFont.variable} flex min-h-screen flex-col`}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema).replace(/</gu, "\\u003c") }}
         />
         <a
           href="#main-content"
@@ -55,8 +84,8 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
           Bỏ qua điều hướng
         </a>
         <Navbar />
-        <ScrollAnimations />
-        <div id="main-content">{children}</div>
+        <ClientTelemetry />
+        <div id="main-content" className="flex flex-1 flex-col" tabIndex={-1}>{children}</div>
         <Footer />
         <MobileContactBar />
       </body>

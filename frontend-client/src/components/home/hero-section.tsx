@@ -1,57 +1,50 @@
-import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
+import { ArrowRight, Play } from "@phosphor-icons/react/dist/ssr";
 import Link from "next/link";
 
-import { SystemArchitecture } from "@/components/shared/system-architecture";
+import { SystemDashboard } from "@/components/home/system-dashboard";
+import { HeroVisualMotion, MotionAction, MotionSection } from "@/components/shared/motion-primitives";
+import { Button } from "@/components/ui/button";
 
 export function HeroSection() {
   return (
-    <section className="system-hero qts-dark bg-qts-deep text-white">
-      <div className="system-hero__grid page-shell">
-        <div className="system-hero__content">
-          <p className="system-hero__statement">Engineering intelligence. Building human impact.</p>
-          <h1 className="hero-title font-bold">
-            <span className="hero-title__line"><span>Thiết kế và vận hành</span></span>
-            <span className="hero-title__line"><span>hệ thống số</span></span>
-            <span className="hero-title__line"><span>cho quy trình phức tạp.</span></span>
+    <MotionSection className="flow-hero" aria-labelledby="home-hero-title">
+      <div className="flow-hero__wash" aria-hidden="true" />
+      <div className="flow-hero__grid page-shell">
+        <div className="flow-hero__content">
+          <h1 id="home-hero-title" className="flow-hero__title" lang="en">
+            <span>Operate.</span>
+            <span>Secure.</span>
+            <span className="flow-hero__title-accent">Scale Enterprise Systems.</span>
           </h1>
-          <p className="hero-description body-wrap">
-            QTS chuyển bài toán vận hành thành kiến trúc, lộ trình triển khai và cơ chế cải tiến có thể kiểm tra.
+          <p id="home-hero-description" className="flow-hero__description">
+            QTS giúp doanh nghiệp giám sát, tích hợp và vận hành hệ thống trong một kiến trúc thống nhất.
           </p>
-          <div className="system-hero__actions">
-            <Link href="/nang-luc" className="qts-button qts-button--accent qts-button--hero">
-              Khám phá năng lực
-              <ArrowRight size={20} weight="bold" aria-hidden="true" />
-            </Link>
-            <span className="system-hero__mode"><i aria-hidden="true" /> System loop / active</span>
+          <div className="flow-hero__actions">
+            <MotionAction>
+              <Button asChild size="lg">
+                <Link href="/lien-he" prefetch aria-describedby="home-hero-description">
+                  Trao đổi với QTS
+                  <ArrowRight size={18} weight="bold" aria-hidden="true" />
+                </Link>
+              </Button>
+            </MotionAction>
+            <MotionAction>
+              <Button asChild size="lg" variant="ghost">
+                <Link href="/#phuong-phap" prefetch aria-describedby="home-hero-description">
+                  <Play size={15} weight="fill" aria-hidden="true" />
+                  Xem hệ thống mẫu
+                </Link>
+              </Button>
+            </MotionAction>
           </div>
-          <dl className="system-hero__facts">
-            <div>
-              <dt>Architecture</dt>
-              <dd>Ranh giới rõ</dd>
-            </div>
-            <div>
-              <dt>Security</dt>
-              <dd>Ngay từ thiết kế</dd>
-            </div>
-            <div>
-              <dt>Operations</dt>
-              <dd>Có thể quan sát</dd>
-            </div>
-          </dl>
-          <nav className="hero-system-loop" aria-label="QTS system loop">
-            <span className="hero-system-loop__label">System loop</span>
-            <ol>
-              <li>ARCH</li>
-              <li>INT</li>
-              <li>SEC</li>
-              <li>OPS</li>
-            </ol>
-          </nav>
         </div>
-        <div className="system-hero__visual">
-          <SystemArchitecture />
-        </div>
+        <HeroVisualMotion className="flow-hero__visual">
+          <span className="flow-floating-node flow-floating-node--architecture" aria-hidden="true">Architecture Node</span>
+          <span className="flow-floating-node flow-floating-node--security" aria-hidden="true">Security Engine</span>
+          <span className="flow-floating-node flow-floating-node--operations" aria-hidden="true">Operation Center</span>
+          <SystemDashboard />
+        </HeroVisualMotion>
       </div>
-    </section>
+    </MotionSection>
   );
 }

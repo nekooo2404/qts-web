@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import {
   ArrowSquareOut,
@@ -12,20 +11,25 @@ import {
 } from "@phosphor-icons/react/dist/ssr";
 
 import { ContactForm } from "@/components/contact/contact-form";
+import { ContentSourceNotice } from "@/components/shared/content-source-notice";
 import { getCompanyInfo } from "@/lib/public-api";
+import { createPageMetadata } from "@/lib/seo";
 
 const supportEmail = "support@qts.com.vn";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Trao đổi với QTS",
   description: "Bắt đầu từ bài toán cần được giải quyết và gửi phạm vi hệ thống cho đội ngũ QTS.",
-};
+  path: "/lien-he",
+});
 
 export default async function ContactPage() {
-  const companyInfo = await getCompanyInfo();
+  const companyResult = await getCompanyInfo();
+  const companyInfo = companyResult.data;
   return (
-    <main className="contact-page">
-      <section className="contact-section bg-qts-paper pb-16 sm:pb-20 lg:pb-28" aria-labelledby="contact-title">
+    <main className="contact-page section-stack">
+      <ContentSourceNotice source={companyResult.source} reason={companyResult.reason} />
+      <section data-scroll-reveal="section" className="contact-section bg-qts-paper pb-16 sm:pb-20 lg:pb-28" aria-labelledby="contact-title">
         <div className="page-shell">
           <header className="contact-page__header" data-reveal>
             <p className="contact-eyebrow">Trao đổi với QTS</p>
@@ -120,7 +124,6 @@ export default async function ContactPage() {
                 width={1200}
                 height={420}
                 sizes="(min-width: 1024px) 420px, 100vw"
-                unoptimized
               />
               <figcaption>PROBLEM / DISCOVERY / ARCHITECTURE / OPERATIONS</figcaption>
             </figure>

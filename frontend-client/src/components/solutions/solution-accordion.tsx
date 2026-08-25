@@ -116,6 +116,7 @@ export function ProblemExplorer({ items = solutions }: { items?: PublicSolution[
 
       <section
         id={`problem-panel-${activeItem.id}`}
+        data-scroll-reveal="section"
         role="tabpanel"
         aria-labelledby={`problem-tab-${activeItem.id}`}
         className="problem-explorer__panel"
@@ -136,7 +137,6 @@ export function ProblemExplorer({ items = solutions }: { items?: PublicSolution[
             width={1200}
             height={620}
             sizes="(min-width: 1024px) 760px, 100vw"
-            unoptimized
           />
           <figcaption>{activeVisual.caption}</figcaption>
         </figure>

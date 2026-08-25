@@ -1,6 +1,7 @@
 import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
 import Link from "next/link";
 
+import { Button } from "@/components/ui/button";
 import { getCompanyInfo } from "@/lib/public-api";
 
 const footerGroups = [
@@ -28,32 +29,38 @@ const footerGroups = [
     label: "Công ty",
     links: [
       { href: "/du-an", label: "Dự án" },
+      { href: "/quyen-rieng-tu", label: "Quyền riêng tư" },
     ],
   },
 ] as const;
 
 export default async function Footer() {
-  const companyInfo = await getCompanyInfo();
+  const companyResult = await getCompanyInfo();
+  const companyInfo = companyResult.data;
   return (
-    <footer className="site-footer qts-dark">
+    <footer className="site-footer qts-glass qts-dark data-[solid=true]:bg-white/90 data-[solid=true]:backdrop-blur-xl data-[solid=true]:border-b data-[solid=true]:border-white/10 data-[solid=true]:shadow-[0_8px_32px_rgb(0,0,0,0.08)]">
       <div className="page-shell">
         <section
           className="site-footer__closing"
           aria-labelledby="footer-closing-title"
+          data-scroll-reveal="section"
           data-reveal="footer-closing"
         >
           <div className="site-footer__closing-grid">
             <div>
               <h2 id="footer-closing-title" className="site-footer__closing-title">
-                Ready to build<br />the system?
+                <span>Sẵn sàng vận hành</span>
+                <span>hệ thống doanh nghiệp?</span>
               </h2>
               <p className="site-footer__closing-copy">
-                Từ bài toán phức tạp đến một hệ thống có thể triển khai, kiểm tra và cải tiến.
+                Từ kiến trúc đến cải tiến liên tục.
               </p>
-              <Link href="/lien-he" className="qts-button site-footer__cta">
-                Trao đổi với QTS
-                <ArrowRight size={21} weight="bold" aria-hidden="true" />
-              </Link>
+              <Button asChild size="lg" variant="secondary" className="site-footer__cta">
+                <Link href="/lien-he" prefetch aria-label="Trao đổi với QTS về hệ thống doanh nghiệp">
+                  Trao đổi với QTS
+                  <ArrowRight size={21} weight="bold" aria-hidden="true" />
+                </Link>
+              </Button>
             </div>
 
             <div className="footer-system-loop" aria-label="QTS System Loop">
@@ -121,7 +128,10 @@ export default async function Footer() {
 
         <div className="site-footer__legal">
           <p>© {new Date().getFullYear()} QTS Technology Solutions.</p>
-          <p>{companyInfo.address}</p>
+          <Link href="/quyen-rieng-tu" className="site-footer__link">Thông báo quyền riêng tư</Link>
+          {companyResult.source === "fixture" ? (
+            <p className="site-footer__source">Thông tin liên hệ tham chiếu · CMS chưa khả dụng</p>
+          ) : null}
         </div>
       </div>
     </footer>

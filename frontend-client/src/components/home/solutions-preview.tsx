@@ -1,136 +1,425 @@
-import type { Icon } from "@phosphor-icons/react";
-import {
-  ArrowUpRight,
-  ArrowsClockwise,
-  ChartLineUp,
-  ChartPieSlice,
-  Cube,
-  Database,
-  Eye,
-  FileText,
-  Funnel,
-  HardDrives,
-  MagnifyingGlass,
-  PuzzlePiece,
-  ShieldCheck,
-  Stack,
-} from "@phosphor-icons/react/dist/ssr";
-import Link from "next/link";
+"use client";
 
+import {
+  ArrowRight,
+  ArrowUp,
+  ArrowUpRight,
+  CaretDown,
+  Check,
+  Database,
+  FlowArrow,
+  HardDrives,
+  Pause,
+  Play,
+  Pulse,
+  ShieldCheck,
+} from "@phosphor-icons/react";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+
+import { DepthSurface, MotionSection } from "@/components/shared/motion-primitives";
 import { solutions } from "@/data/site-content";
 import type { PublicSolution } from "@/types/public-content";
 
-const solutionVisuals: Record<string, { leadIcon: Icon; nodeIcons: Icon[]; problemLines: string[] }> = {
-  cybersecurity: {
-    leadIcon: MagnifyingGlass,
-    nodeIcons: [FileText, Funnel, ChartPieSlice, ShieldCheck],
-    problemLines: ["Sự kiện an ninh", "nằm rải rác, khó", "phát hiện và", "phối hợp xử lý."],
+const operatingLayers = [
+  {
+    id: "foundation",
+    code: "01",
+    title: "Foundation",
+    subtitle: "Infrastructure",
+    description: "Thiết lập hạ tầng, môi trường và baseline dịch vụ có thể kiểm soát.",
+    status: "STABLE",
+    icon: HardDrives,
+    capabilities: ["Compute & Network", "Backup & Recovery", "Service Baseline"],
+    metrics: [
+      { label: "Operating zones", value: "02" },
+      { label: "Environments", value: "03" },
+      { label: "Availability target", value: "99.9%" },
+    ],
   },
-  infrastructure: {
-    leadIcon: ChartLineUp,
-    nodeIcons: [Stack, HardDrives, ArrowsClockwise, Eye],
-    problemLines: ["Hạ tầng phân", "mảnh khiến thay", "đổi chậm và khó", "kiểm soát độ", "sẵn sàng."],
+  {
+    id: "integration",
+    code: "02",
+    title: "Integration",
+    subtitle: "API & Data Flow",
+    description: "Kết nối ứng dụng, API và dữ liệu qua luồng tích hợp có thể truy vết.",
+    status: "RUNNING",
+    icon: FlowArrow,
+    capabilities: ["API Gateway", "Event Flow", "Data Contracts"],
+    metrics: [
+      { label: "Integration paths", value: "12" },
+      { label: "Control points", value: "04" },
+      { label: "Flow state", value: "RUNNING" },
+    ],
   },
-  "data-platform": {
-    leadIcon: Database,
-    nodeIcons: [Database, PuzzlePiece, ShieldCheck, Cube],
-    problemLines: ["Dữ liệu cùng một", "nghiệp vụ nhưng", "khác định nghĩa", "và không theo", "kịp quyết định."],
+  {
+    id: "security",
+    code: "03",
+    title: "Security",
+    subtitle: "IAM & Protection",
+    description: "Đưa danh tính, bảo vệ và giám sát vào từng đường đi của hệ thống.",
+    status: "ACTIVE",
+    icon: ShieldCheck,
+    capabilities: ["Identity Control", "Threat Detection", "Audit Trail"],
+    metrics: [
+      { label: "Integrated sources", value: "12" },
+      { label: "Analysis engines", value: "03" },
+      { label: "Response target", value: "<15 min" },
+    ],
   },
-};
+  {
+    id: "operations",
+    code: "04",
+    title: "Operations",
+    subtitle: "Monitoring & Response",
+    description: "Quan sát dịch vụ, điều phối sự cố và kiểm soát thay đổi liên tục.",
+    status: "HEALTHY",
+    icon: Pulse,
+    capabilities: ["Service Monitoring", "Incident Response", "Change Governance"],
+    metrics: [
+      { label: "System health", value: "98.7%" },
+      { label: "Monitoring model", value: "24/7" },
+      { label: "Response target", value: "<15 min" },
+    ],
+  },
+] as const;
+
+const moduleDefinitions = [
+  {
+    id: "cybersecurity",
+    code: "01",
+    title: "Cybersecurity Control",
+    category: "Security Operations",
+    description: "Phát hiện, phân tích và điều phối phản ứng trong cùng một control path.",
+    status: "ACTIVE",
+    icon: ShieldCheck,
+    secondaryIcon: FlowArrow,
+    flow: ["Detect", "Analyze", "Respond"],
+    metrics: [
+      { value: "12", label: "Integrated sources" },
+      { value: "03", label: "Analysis engines" },
+      { value: "<15 min", label: "Response target" },
+    ],
+  },
+  {
+    id: "infrastructure",
+    code: "02",
+    title: "Infrastructure Platform",
+    category: "Enterprise Foundation",
+    description: "Chuẩn hóa workload, hạ tầng và observability thành một operating baseline.",
+    status: "STABLE",
+    icon: HardDrives,
+    secondaryIcon: Pulse,
+    flow: ["Workload", "Platform", "Observe"],
+    metrics: [
+      { value: "02", label: "Operating zones" },
+      { value: "03", label: "Environments" },
+      { value: "99.9%", label: "Availability target" },
+    ],
+  },
+  {
+    id: "data-platform",
+    code: "03",
+    title: "Data Pipeline",
+    category: "Data Operations",
+    description: "Đưa dữ liệu từ nguồn đến sản phẩm qua luồng tích hợp và quản trị thống nhất.",
+    status: "RUNNING",
+    icon: Database,
+    secondaryIcon: FlowArrow,
+    flow: ["Source", "Integrate", "Govern", "Serve"],
+    metrics: [
+      { value: "08", label: "Data domains" },
+      { value: "04", label: "Processing layers" },
+      { value: "RUNNING", label: "Pipeline status" },
+    ],
+  },
+] as const;
+
+const liveStates = [
+  ["Security", "Healthy"],
+  ["Infrastructure", "Stable"],
+  ["Data", "Running"],
+  ["Operations", "Monitoring"],
+] as const;
 
 export function SolutionsPreview({ items = solutions }: { items?: PublicSolution[] }) {
+  const [activeLayerId, setActiveLayerId] = useState("operations");
+  const [activeModuleIndex, setActiveModuleIndex] = useState(0);
+  const [isCompact, setIsCompact] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [reducedMotion, setReducedMotion] = useState(false);
+
+  useEffect(() => {
+    const compact = window.matchMedia("(max-width: 47.99rem)");
+    const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const sync = () => {
+      setIsCompact(compact.matches);
+      setReducedMotion(motion.matches);
+    };
+    sync();
+    compact.addEventListener("change", sync);
+    motion.addEventListener("change", sync);
+    return () => {
+      compact.removeEventListener("change", sync);
+      motion.removeEventListener("change", sync);
+    };
+  }, []);
+
+  const activeLayer = operatingLayers.find((layer) => layer.id === activeLayerId) ?? operatingLayers[3];
+  const displayedLayers = [...operatingLayers].reverse();
+  const availableModules = moduleDefinitions.filter((module) => items.some((item) => item.id === module.id));
+  const displayedModules = availableModules.length > 0 ? availableModules : moduleDefinitions;
+  const motionActive = isPlaying && !reducedMotion;
+
   return (
-    <section
-      id="giai-phap"
-      className="solutions-preview py-16 sm:py-20 lg:py-28"
-      aria-labelledby="solutions-title"
-    >
+    <MotionSection id="giai-phap" className="architecture-system" aria-labelledby="architecture-system-title">
       <div className="page-shell">
-        <div className="grid gap-6 lg:grid-cols-12 lg:items-end" data-reveal="solution-story-intro">
-          <h2
-            id="solutions-title"
-            className="display-wrap text-3xl font-semibold leading-tight text-qts-deep sm:text-4xl lg:col-span-7 lg:text-5xl"
-          >
-            Bắt đầu bằng vấn đề. Kết thúc bằng một trạng thái vận hành rõ ràng.
+        <header className="architecture-system__heading" data-reveal="architecture-heading">
+          <h2 id="architecture-system-title">
+            <span>Một kiến trúc.</span>
+            <span>Bốn lớp vận hành.</span>
           </h2>
-          <p className="body-wrap text-base leading-7 text-qts-muted lg:col-span-4 lg:col-start-9">
-            Mỗi hướng giải pháp được biểu diễn bằng luồng kiến trúc để người đọc thấy cách các lớp liên kết.
+          <p>
+            Một mô hình thống nhất kết nối foundation, integration, security và operations
+            để hệ thống được thiết kế cho vận hành liên tục.
           </p>
-        </div>
+        </header>
 
-        <ol className="solution-story">
-          {items.map((item, index) => {
-            const visual = solutionVisuals[item.id] ?? solutionVisuals.cybersecurity;
-            const LeadIcon = visual.leadIcon;
+        <DepthSurface className="depth-tool-wrap" strength={2.25}>
+        <section
+          className="architecture-console"
+          data-scroll-reveal="section"
+          data-playing={motionActive}
+          aria-labelledby="architecture-console-title"
+          data-reveal="architecture-console"
+        >
+          <header className="architecture-console__top">
+            <div>
+              <span className="architecture-console__mark">Q</span>
+              <div>
+                <small>QTS Operating Architecture</small>
+                <h3 id="architecture-console-title">ARCHITECTURE SYSTEM</h3>
+              </div>
+            </div>
+            <div className="architecture-console__actions">
+              <span className="architecture-console__model">Reference model</span>
+              <button
+                type="button"
+                className="architecture-console__motion"
+                disabled={reducedMotion}
+                aria-label={
+                  reducedMotion
+                    ? "Chuyển động đã tắt theo cài đặt hệ thống"
+                    : motionActive
+                      ? "Tạm dừng luồng kiến trúc"
+                      : "Phát luồng kiến trúc"
+                }
+                title={
+                  reducedMotion
+                    ? "Chuyển động đã tắt theo cài đặt hệ thống"
+                    : motionActive
+                      ? "Tạm dừng luồng kiến trúc"
+                      : "Phát luồng kiến trúc"
+                }
+                onClick={() => setIsPlaying((current) => !current)}
+              >
+                {motionActive ? (
+                  <Pause size={16} weight="bold" aria-hidden="true" />
+                ) : (
+                  <Play size={16} weight="fill" aria-hidden="true" />
+                )}
+              </button>
+            </div>
+          </header>
 
-            return (
-              <li key={item.id}>
-                <article
-                  className={`solution-story__row solution-story__row--${item.id}`}
-                  data-story-row
-                  aria-labelledby={`solution-problem-${item.id}`}
-                >
-                  <div className="solution-story__rail" aria-hidden="true">
-                    <span className="solution-story__number">{String(index + 1).padStart(2, "0")}</span>
-                    <span className="solution-story__lead-icon">
-                      <LeadIcon size={34} weight="light" />
-                    </span>
+          <div className="architecture-console__body">
+            <section className="architecture-map" aria-labelledby="architecture-map-title">
+              <header>
+                <div>
+                  <small>Architecture Map</small>
+                  <h3 id="architecture-map-title">Operating Layers</h3>
+                </div>
+                <span><ArrowUp size={16} weight="bold" aria-hidden="true" /> Business</span>
+              </header>
+
+              <ol>
+                {displayedLayers.map((layer, index) => {
+                  const Icon = layer.icon;
+                  const active = layer.id === activeLayer.id;
+                  return (
+                    <li key={layer.id} className={active ? "is-active" : undefined}>
+                      <button
+                        type="button"
+                        aria-pressed={active}
+                        onClick={() => setActiveLayerId(layer.id)}
+                      >
+                        <span className="architecture-layer__code">{layer.code}</span>
+                        <span className="architecture-layer__icon"><Icon size={21} weight="regular" aria-hidden="true" /></span>
+                        <span className="architecture-layer__copy">
+                          <strong>{layer.title}</strong>
+                          <small>{layer.subtitle}</small>
+                        </span>
+                        <span className="architecture-layer__status"><i aria-hidden="true" /> {layer.status}</span>
+                      </button>
+                      {index < displayedLayers.length - 1 ? (
+                        <span className="architecture-layer__connector" aria-hidden="true"><i /></span>
+                      ) : null}
+                    </li>
+                  );
+                })}
+              </ol>
+
+              <footer>
+                <span>System</span>
+                <strong>Enterprise foundation</strong>
+              </footer>
+            </section>
+
+            <section className="architecture-detail" aria-live="polite" aria-atomic="true">
+              <header>
+                <div>
+                  <small>Active layer · {activeLayer.code}</small>
+                  <h3>{activeLayer.title}</h3>
+                </div>
+                <span><i aria-hidden="true" /> {activeLayer.status}</span>
+              </header>
+
+              <p>{activeLayer.description}</p>
+
+              <div className="architecture-detail__capabilities">
+                <span>System capabilities</span>
+                <ul>
+                  {activeLayer.capabilities.map((capability) => (
+                    <li key={capability}><Check size={15} weight="bold" aria-hidden="true" /> {capability}</li>
+                  ))}
+                </ul>
+              </div>
+
+              <dl>
+                {activeLayer.metrics.map((metric) => (
+                  <div key={metric.label}>
+                    <dt>{metric.label}</dt>
+                    <dd>{metric.value}</dd>
                   </div>
+                ))}
+              </dl>
+            </section>
 
-                  <h3
-                    id={`solution-problem-${item.id}`}
-                    className="solution-story__problem"
-                    aria-label={item.problem}
-                  >
-                    {visual.problemLines.map((line) => (
-                      <span key={line} className="solution-story__problem-line" aria-hidden="true">
-                        <span>{line}</span>
-                      </span>
-                    ))}
-                  </h3>
+            <aside className="architecture-live" aria-labelledby="architecture-live-title">
+              <header>
+                <div>
+                  <small>System Preview</small>
+                  <h3 id="architecture-live-title">REFERENCE ARCHITECTURE VIEW</h3>
+                </div>
+                <Pulse size={19} weight="regular" aria-hidden="true" />
+              </header>
+              <ul>
+                {liveStates.map(([label, state]) => (
+                  <li key={label}>
+                    <span>{label}</span>
+                    <strong><i aria-hidden="true" /> {state}</strong>
+                  </li>
+                ))}
+              </ul>
+              <footer>
+                <span>Reference snapshot</span>
+                <strong>Illustrative only</strong>
+                <small>Illustrative system state</small>
+              </footer>
+            </aside>
+          </div>
+        </section>
+        </DepthSurface>
 
-                  <div className="solution-story__content">
-                    <ol className="solution-story__pipeline" aria-label="Luồng kiến trúc giải pháp">
-                      {item.architecture.map((layer, layerIndex) => {
-                        const NodeIcon = visual.nodeIcons[layerIndex] ?? FileText;
+        <section data-scroll-reveal="section" className="architecture-modules" aria-labelledby="architecture-modules-title" data-reveal="architecture-modules">
+          <header>
+            <h3 id="architecture-modules-title">Operating system modules</h3>
+            <p>Reference architecture values · Not live production data.</p>
+          </header>
 
-                        return (
-                          <li key={layer} className="solution-story__stage">
-                            <div className="solution-story__node">
-                              <span className="solution-story__node-icon" aria-hidden="true">
-                                <NodeIcon size={27} weight="light" />
-                              </span>
-                              <span>{layer}</span>
-                            </div>
-                            {layerIndex < item.architecture.length - 1 ? (
-                              <span className="solution-story__connector" aria-hidden="true">
-                                <svg viewBox="0 0 48 12" preserveAspectRatio="none">
-                                  <path className="solution-story__connector-base" d="M1 6H44" />
-                                  <path className="solution-story__connector-flow" pathLength="1" d="M1 6H44" />
-                                  <path className="solution-story__connector-arrow" d="m40 2 5 4-5 4" />
-                                </svg>
-                              </span>
-                            ) : null}
-                          </li>
-                        );
-                      })}
+          <div className="architecture-module-list">
+            {displayedModules.map((module, index) => {
+              const Icon = module.icon;
+              const SecondaryIcon = module.secondaryIcon;
+              const expanded = !isCompact || activeModuleIndex === index;
+              const bodyId = `architecture-module-${module.id}`;
+              const summary = (
+                <>
+                  <span className="architecture-module__code">{module.code}</span>
+                  <span className="architecture-module__icons">
+                    <Icon size={22} weight="regular" aria-hidden="true" />
+                    <SecondaryIcon size={14} weight="bold" aria-hidden="true" />
+                  </span>
+                  <span className="architecture-module__identity">
+                    <small>{module.category}</small>
+                    <strong>{module.title}</strong>
+                  </span>
+                  <span className="architecture-module__status"><i aria-hidden="true" /> {module.status}</span>
+                  {isCompact ? <CaretDown size={18} weight="bold" aria-hidden="true" /> : null}
+                </>
+              );
+
+              return (
+                <article key={module.id} className={`architecture-module${expanded ? " is-active" : ""}`}>
+                  {isCompact ? (
+                    <button
+                      type="button"
+                      className="architecture-module__summary"
+                      aria-expanded={expanded}
+                      aria-controls={bodyId}
+                      onClick={() => setActiveModuleIndex((current) => current === index ? -1 : index)}
+                    >
+                      {summary}
+                    </button>
+                  ) : (
+                    <div className="architecture-module__summary">{summary}</div>
+                  )}
+
+                  <div id={bodyId} className="architecture-module__body" hidden={!expanded}>
+                    <div className="architecture-module__description">
+                      <p>{module.description}</p>
+                    </div>
+
+                    <ol
+                      className={`architecture-module__flow architecture-module__flow--${module.flow.length}`}
+                      aria-label={`Luồng ${module.title}`}
+                    >
+                      {module.flow.map((stage, stageIndex) => (
+                        <li key={stage}>
+                          <span>{stage}</span>
+                          {stageIndex < module.flow.length - 1 ? <ArrowRight size={15} weight="bold" aria-hidden="true" /> : null}
+                        </li>
+                      ))}
                     </ol>
 
-                    <p className="solution-story__result">
-                      <span>{item.desiredState}</span>
-                    </p>
+                    <dl className="architecture-module__metrics">
+                      {module.metrics.map((metric) => (
+                        <div key={metric.label}>
+                          <dt>{metric.label}</dt>
+                          <dd>{metric.value}</dd>
+                        </div>
+                      ))}
+                    </dl>
                   </div>
                 </article>
-              </li>
-            );
-          })}
-        </ol>
+              );
+            })}
+          </div>
+        </section>
 
-        <Link href="/giai-phap" className="solution-story__link">
-          Xem cấu trúc giải pháp
-          <ArrowUpRight size={19} weight="bold" aria-hidden="true" />
-        </Link>
+        <footer className="architecture-system__footer">
+          <dl className="architecture-system__metrics">
+            <div><dt>Integrated sources</dt><dd>12</dd></div>
+            <div><dt>Operating layers</dt><dd>04</dd></div>
+            <div><dt>Availability target</dt><dd>99.9%</dd></div>
+            <div><dt>Response target</dt><dd>&lt;15 min</dd></div>
+          </dl>
+          <Link href="/giai-phap">
+            Xem cấu trúc giải pháp
+            <ArrowUpRight size={18} weight="bold" aria-hidden="true" />
+          </Link>
+        </footer>
       </div>
-    </section>
+    </MotionSection>
   );
 }

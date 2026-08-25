@@ -1,15 +1,17 @@
-import type { Metadata } from "next";
 import { Check } from "@phosphor-icons/react/dist/ssr";
 import Image from "next/image";
 
 import { PageIntro } from "@/components/shared/page-intro";
+import { ContentSourceNotice } from "@/components/shared/content-source-notice";
 import { capabilityIcons } from "@/data/site-content";
 import { getCapabilities } from "@/lib/public-api";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Năng lực",
   description: "Bốn lớp năng lực của QTS từ kiến trúc, tích hợp, an toàn thông tin đến vận hành hệ thống.",
-};
+  path: "/nang-luc",
+});
 
 const qualityGates = [
   { code: "G1", title: "Ranh giới", description: "Phạm vi, phụ thuộc và trách nhiệm được xác định." },
@@ -21,14 +23,15 @@ const qualityGates = [
 export default async function CapabilitiesPage() {
   const capabilityItems = await getCapabilities();
   return (
-    <main>
+    <main className="section-stack">
       <PageIntro
         variant="capabilities"
         title="QTS System. Bốn lớp, một vòng vận hành."
         description="Kiến trúc, tích hợp, an toàn thông tin và vận hành dùng chung một bản đồ hệ thống, cùng chịu các cổng kiểm soát."
       />
+      <ContentSourceNotice source={capabilityItems.source} reason={capabilityItems.reason} />
 
-      <section className="capability-stack-section py-16 sm:py-20 lg:py-28" aria-labelledby="capability-stack-title">
+      <section data-scroll-reveal="section" className="capability-stack-section py-16 sm:py-20 lg:py-28" aria-labelledby="capability-stack-title">
         <div className="page-shell">
           <div className="grid gap-6 border-b border-qts-border pb-8 lg:grid-cols-12 lg:items-end" data-reveal>
             <h2 id="capability-stack-title" className="display-wrap text-3xl font-bold leading-tight text-qts-deep sm:text-4xl lg:col-span-7 lg:text-5xl">
@@ -47,7 +50,6 @@ export default async function CapabilitiesPage() {
               height={540}
               sizes="(min-width: 1024px) 1200px, 100vw"
               priority
-              unoptimized
             />
             <figcaption>
               <span>QTS / CAPABILITY BLUEPRINT</span>
@@ -56,13 +58,13 @@ export default async function CapabilitiesPage() {
           </figure>
 
           <ol className="capability-stack">
-            {capabilityItems.map((capability, index) => {
+            {capabilityItems.data.map((capability, index) => {
               const Icon = capabilityIcons[capability.iconKey];
               const titleId = `${capability.id}-title`;
               const scopeId = `${capability.id}-scope`;
               const outputId = `${capability.id}-output`;
               const current = String(index + 1).padStart(2, "0");
-              const total = String(capabilityItems.length).padStart(2, "0");
+              const total = String(capabilityItems.data.length).padStart(2, "0");
               return (
                 <li key={capability.id} className="capability-stack__item">
                   <article
@@ -73,7 +75,7 @@ export default async function CapabilitiesPage() {
                   >
                     <div className="capability-layer__identity">
                       <p className="capability-layer__count">
-                        <span className="sr-only">Lớp {index + 1} trên {capabilityItems.length}</span>
+                        <span className="sr-only">Lớp {index + 1} trên {capabilityItems.data.length}</span>
                         <strong aria-hidden="true">{current}</strong>
                         <span aria-hidden="true">/ {total}</span>
                       </p>
@@ -119,7 +121,7 @@ export default async function CapabilitiesPage() {
         </div>
       </section>
 
-      <section className="qts-dark bg-qts-deep py-16 text-white sm:py-20 lg:py-24">
+      <section data-scroll-reveal="section" className="qts-dark bg-qts-deep py-16 text-white sm:py-20 lg:py-24">
         <div className="page-shell" data-reveal>
           <div className="grid gap-8 lg:grid-cols-12">
             <div className="lg:col-span-4">

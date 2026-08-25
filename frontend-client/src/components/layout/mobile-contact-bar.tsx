@@ -12,7 +12,7 @@ export function MobileContactBar() {
   const visible = pathname !== "/lien-he" && pastIntro && !footerVisible;
 
   useEffect(() => {
-    const intro = document.querySelector(".system-hero, .route-intro, .contact-page__header");
+    const intro = document.querySelector(".flow-hero, .pricing-hero, .system-hero, .route-intro, .contact-page__header");
     const footer = document.querySelector(".site-footer");
     const observers: IntersectionObserver[] = [];
     const resetFrame = requestAnimationFrame(() => {
@@ -56,7 +56,7 @@ export function MobileContactBar() {
       <span>
         <i aria-hidden="true" /> QTS system online
       </span>
-      <Link href="/lien-he">
+      <Link href="/lien-he" prefetch aria-label="Trao đổi nhanh với QTS">
         Trao đổi với QTS
         <ArrowRight size={18} weight="bold" aria-hidden="true" />
       </Link>

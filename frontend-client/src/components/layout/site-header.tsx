@@ -15,13 +15,13 @@ import {
   Pulse,
   ShieldCheck,
   StackSimple,
-  X,
 } from "@phosphor-icons/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 import { capabilities, projects, solutions } from "@/data/site-content";
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 
 const menuIcons: Record<string, Icon> = {
   architecture: Blueprint,
@@ -44,21 +44,8 @@ const solutionMenuLabels: Record<string, string> = {
 
 const megaMenus = [
   {
-    id: "capabilities",
-    label: "Năng lực",
-    href: "/nang-luc",
-    summary: "Bốn lớp năng lực từ thiết kế đến vận hành.",
-    ctaLabel: "Khám phá năng lực",
-    items: capabilities.map((item) => ({
-      href: `/nang-luc#${item.id}`,
-      label: item.title,
-      description: item.description,
-      icon: menuIcons[item.id] ?? Blueprint,
-    })),
-  },
-  {
     id: "solutions",
-    label: "Giải pháp",
+    label: "Solutions",
     href: "/giai-phap",
     summary: "Bắt đầu từ vấn đề vận hành, không từ danh mục công nghệ.",
     ctaLabel: "Khám phá giải pháp",
@@ -70,11 +57,24 @@ const megaMenus = [
     })),
   },
   {
+    id: "capabilities",
+    label: "Architecture",
+    href: "/nang-luc",
+    summary: "Bốn lớp năng lực từ thiết kế đến vận hành.",
+    ctaLabel: "Khám phá kiến trúc",
+    items: capabilities.map((item) => ({
+      href: `/nang-luc#${item.id}`,
+      label: item.title,
+      description: item.description,
+      icon: menuIcons[item.id] ?? Blueprint,
+    })),
+  },
+  {
     id: "projects",
-    label: "Dự án",
+    label: "Case Studies",
     href: "/du-an",
     summary: "Các phạm vi kỹ thuật ẩn danh để xem cách kiến trúc được tổ chức.",
-    ctaLabel: "Khám phá dự án",
+    ctaLabel: "Khám phá tình huống",
     items: projects.map((item) => ({
       href: `/du-an#${item.id}`,
       label: item.title,
@@ -96,8 +96,6 @@ export default function Navbar() {
   const isHome = pathname === "/";
   const isSolid = !isHome || scrolled;
   const headerRef = useRef<HTMLElement>(null);
-  const drawerRef = useRef<HTMLDivElement>(null);
-  const mobileButtonRef = useRef<HTMLButtonElement>(null);
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
@@ -139,48 +137,6 @@ export default function Navbar() {
     };
   }, [openMenu]);
 
-  useEffect(() => {
-    if (!mobileOpen) {
-      return;
-    }
-
-    const previousOverflow = document.body.style.overflow;
-    const mobileButton = mobileButtonRef.current;
-    document.body.style.overflow = "hidden";
-    const drawer = drawerRef.current;
-    const focusable = drawer?.querySelectorAll<HTMLElement>(
-      'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
-    );
-    focusable?.[0]?.focus();
-
-    const trapFocus = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setMobileOpen(false);
-        return;
-      }
-      if (event.key !== "Tab" || !focusable?.length) {
-        return;
-      }
-
-      const first = focusable[0];
-      const last = focusable[focusable.length - 1];
-      if (event.shiftKey && document.activeElement === first) {
-        event.preventDefault();
-        last.focus();
-      } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault();
-        first.focus();
-      }
-    };
-
-    document.addEventListener("keydown", trapFocus);
-    return () => {
-      document.body.style.overflow = previousOverflow;
-      document.removeEventListener("keydown", trapFocus);
-      mobileButton?.focus();
-    };
-  }, [mobileOpen]);
-
   function cancelClose() {
     if (closeTimerRef.current) {
       clearTimeout(closeTimerRef.current);
@@ -203,9 +159,10 @@ export default function Navbar() {
   const activeMenu = megaMenus.find((menu) => menu.id === openMenu);
 
   return (
+    <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
     <header
       ref={headerRef}
-      className="site-header qts-dark"
+      className="site-header qts-glass qts-dark data-[solid=true]:bg-white/90 data-[solid=true]:backdrop-blur-xl data-[solid=true]:border-b data-[solid=true]:border-white/10 data-[solid=true]:shadow-[0_8px_32px_rgb(0,0,0,0.08)] data-[compact=true]:py-3"
       data-compact={scrolled}
       data-menu-open={Boolean(activeMenu)}
       data-solid={isSolid}
@@ -216,25 +173,27 @@ export default function Navbar() {
         <div className="page-shell flex h-full items-center justify-between gap-6">
           <Link
             href="/"
+            prefetch
             className="site-header__brand flex min-h-11 items-center gap-3"
           >
             <span className="site-header__brand-mark" aria-hidden="true">Q</span>
             <span>
-              <span className="block text-lg font-extrabold leading-none">QTS</span>
-              <span className="site-header__brand-detail mt-1 block text-xs font-semibold leading-none">
+              <span className="block text-lg font-extrabold leading-none tracking-tighter">QTS</span>
+              <span className="site-header__brand-detail mt-1 block text-xs font-semibold leading-none text-muted-foreground">
                 Technology Solutions
               </span>
             </span>
           </Link>
 
-          <nav aria-label="Điều hướng chính" className="hidden items-center lg:flex">
+          <nav aria-label="Điều hướng chính" className="hidden items-center gap-8 lg:flex" lang="en">
             <Link
               href="/"
+              prefetch
               className="site-header__nav-link"
               aria-current={pathname === "/" ? "page" : undefined}
               onFocus={() => setOpenMenu(null)}
             >
-              Trang chủ
+              Platform
             </Link>
             {megaMenus.map((menu) => {
               const active = isRouteActive(pathname, menu.href);
@@ -273,26 +232,35 @@ export default function Navbar() {
                     className={expanded ? "rotate-180" : undefined}
                   />
                 </button>
-              );
-            })}
+                );
+              })}
+            <Link
+              href="/pricing"
+              prefetch
+              className="site-header__nav-link"
+              aria-current={isRouteActive(pathname, "/pricing") ? "page" : undefined}
+              onFocus={() => setOpenMenu(null)}
+            >
+              Pricing
+            </Link>
           </nav>
 
-          <Link href="/lien-he" className="site-header__cta hidden lg:inline-flex">
+          <Link href="/lien-he" prefetch className="site-header__cta hidden lg:inline-flex" aria-label="Trao đổi với QTS">
             Trao đổi với QTS
             <ArrowRight size={18} weight="bold" aria-hidden="true" />
           </Link>
 
-          <button
-            ref={mobileButtonRef}
-            type="button"
-            aria-controls="mobile-navigation"
-            aria-expanded={mobileOpen}
-            aria-label={mobileOpen ? "Đóng điều hướng" : "Mở điều hướng"}
-            className="site-header__menu-button grid h-12 w-12 place-items-center border lg:hidden"
-            onClick={() => setMobileOpen((current) => !current)}
-          >
-            {mobileOpen ? <X size={24} weight="bold" aria-hidden="true" /> : <List size={24} weight="bold" aria-hidden="true" />}
-          </button>
+          <SheetTrigger asChild>
+            <button
+              type="button"
+              aria-controls="mobile-navigation"
+              aria-expanded={mobileOpen}
+              aria-label="Mở điều hướng"
+              className="site-header__menu-button grid h-12 w-12 place-items-center border lg:hidden"
+            >
+              <List size={24} weight="bold" aria-hidden="true" />
+            </button>
+          </SheetTrigger>
         </div>
       </div>
 
@@ -311,6 +279,7 @@ export default function Navbar() {
               </h2>
               <Link
                 href={activeMenu.href}
+                prefetch
                 className="mega-panel__overview-link"
               >
                 {activeMenu.ctaLabel}
@@ -324,7 +293,7 @@ export default function Navbar() {
 
                 return (
                   <li key={item.href}>
-                    <Link href={item.href} className="mega-panel__item">
+                    <Link href={item.href} prefetch className="mega-panel__item">
                       <span className="mega-panel__item-number" aria-hidden="true">
                         {String(index + 1).padStart(2, "0")}
                       </span>
@@ -345,27 +314,30 @@ export default function Navbar() {
         </div>
       ) : null}
 
-      {mobileOpen ? (
-        <div
-          ref={drawerRef}
+        <SheetContent
           id="mobile-navigation"
+          side="right"
           className="mobile-drawer lg:hidden"
-          role="dialog"
-          aria-modal="true"
           aria-label="Điều hướng di động"
         >
-          <nav className="page-shell py-5" aria-label="Điều hướng di động">
+          <SheetHeader className="sr-only">
+            <SheetTitle>Điều hướng QTS</SheetTitle>
+            <SheetDescription>Chọn trang cần mở.</SheetDescription>
+          </SheetHeader>
+          <nav className="page-shell py-5" aria-label="Điều hướng di động" lang="en">
             <Link
               href="/"
+              prefetch
               className="mobile-drawer__link"
               aria-current={pathname === "/" ? "page" : undefined}
             >
-              Trang chủ <span aria-hidden="true">01</span>
+              Platform <span aria-hidden="true">01</span>
             </Link>
             {megaMenus.map((link, index) => (
               <Link
                 key={link.href}
                 href={link.href}
+                prefetch
                 className="mobile-drawer__link"
                 aria-current={isRouteActive(pathname, link.href) ? "page" : undefined}
               >
@@ -373,12 +345,20 @@ export default function Navbar() {
                 <span aria-hidden="true">{String(index + 2).padStart(2, "0")}</span>
               </Link>
             ))}
-            <div className="mt-8 border-l-2 border-qts-accent pl-5 text-sm leading-6 text-qts-secondary">
+            <Link
+              href="/pricing"
+              prefetch
+              className="mobile-drawer__link"
+              aria-current={isRouteActive(pathname, "/pricing") ? "page" : undefined}
+            >
+              Pricing <span aria-hidden="true">05</span>
+            </Link>
+            <div className="mt-8 border-l-2 border-qts-accent pl-5 text-sm leading-6 text-qts-secondary" lang="vi">
               Thiết kế và vận hành hệ thống số cho quy trình phức tạp.
             </div>
           </nav>
-        </div>
-      ) : null}
+        </SheetContent>
     </header>
+    </Sheet>
   );
 }

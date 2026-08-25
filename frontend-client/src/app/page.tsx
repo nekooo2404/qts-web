@@ -5,23 +5,27 @@ import { ProjectsSection } from "@/components/home/projects-section";
 import { SolutionsPreview } from "@/components/home/solutions-preview";
 import { TrustedCompaniesStrip } from "@/components/home/trusted-companies-strip";
 import { WorkflowSection } from "@/components/home/workflow-section";
-import { getCapabilities, getProjects, getSolutions } from "@/lib/public-api";
+import { ContentSourceNotice } from "@/components/shared/content-source-notice";
+import { getProjects, getSolutions } from "@/lib/public-api";
 
 export default async function HomePage() {
-  const [capabilities, projects, solutions] = await Promise.all([
-    getCapabilities(),
+  const [projects, solutions] = await Promise.all([
     getProjects(),
     getSolutions(),
   ]);
   return (
-    <main>
+    <main className="section-stack">
       <HeroSection />
-      <WorkflowSection />
-      <CapabilitiesSection items={capabilities} />
-      <SolutionsPreview items={solutions} />
-      <ProjectsSection items={projects} />
-      <HomeClosing />
+      <ContentSourceNotice
+        source={projects.source === "fixture" || solutions.source === "fixture" ? "fixture" : "cms"}
+        reason={projects.reason ?? solutions.reason}
+      />
       <TrustedCompaniesStrip />
+      <CapabilitiesSection />
+      <WorkflowSection />
+      <SolutionsPreview items={solutions.data} />
+      <ProjectsSection items={projects.data} />
+      <HomeClosing />
     </main>
   );
 }

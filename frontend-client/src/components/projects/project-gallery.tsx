@@ -18,6 +18,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 
+import { Button } from "@/components/ui/button";
 import { projects as projectFallback } from "@/data/site-content";
 import type { PublicProject } from "@/types/public-content";
 
@@ -78,7 +79,6 @@ export function ProjectGallery({ compact = false, items = projectFallback }: Pro
                 sizes="(min-width: 1280px) 25rem, (min-width: 768px) 50vw, 100vw"
                 className="object-cover"
                 loading={compact ? "lazy" : "eager"}
-                unoptimized
               />
             </figure>
 
@@ -139,13 +139,15 @@ export function ProjectGallery({ compact = false, items = projectFallback }: Pro
       </div>
 
       {!compact ? (
-        <section className="project-assurance" aria-labelledby="project-assurance-title">
+        <section data-scroll-reveal="section" className="project-assurance" aria-labelledby="project-assurance-title">
           <div className="project-assurance__heading">
             <h2 id="project-assurance-title">Technical proof before promise.</h2>
-            <Link href="/lien-he" className="qts-button project-assurance__cta">
-              Tư vấn giải pháp phù hợp
-              <ArrowRight size={19} weight="bold" aria-hidden="true" />
-            </Link>
+            <Button asChild size="lg" className="project-assurance__cta">
+              <Link href="/lien-he" prefetch aria-label="Nhận tư vấn giải pháp phù hợp từ QTS">
+                Tư vấn giải pháp phù hợp
+                <ArrowRight size={19} weight="bold" aria-hidden="true" />
+              </Link>
+            </Button>
           </div>
           <ul className="project-assurance__list">
             {assuranceItems.map((item) => {

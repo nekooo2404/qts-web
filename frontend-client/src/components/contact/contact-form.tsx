@@ -3,12 +3,15 @@
 import {
   CheckCircle,
   CircleNotch,
-  EnvelopeSimple,
   PaperPlaneTilt,
   WarningCircle,
 } from "@phosphor-icons/react";
+import Link from "next/link";
 import type { FormEvent, FocusEvent } from "react";
 import { useRef, useState } from "react";
+
+import { Button } from "@/components/ui/button";
+import { PRIVACY_NOTICE_VERSION } from "@/lib/privacy";
 
 type SubmissionState =
   | { kind: "idle" }
@@ -16,7 +19,7 @@ type SubmissionState =
   | { kind: "success"; message: string }
   | { kind: "error"; message: string };
 
-type QualifierFieldName = "problemType" | "systemScale";
+type QualifierFieldName = "problemType" | "systemScale" | "privacyConsent";
 type ContactFieldName = "customerName" | "email" | "phone" | "message";
 type FieldName = QualifierFieldName | ContactFieldName;
 type FieldErrors = Partial<Record<FieldName, string>>;
@@ -29,8 +32,6 @@ interface CreatedLeadResponse {
   };
 }
 
-const configuredApiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL?.trim();
-const apiBaseUrl = (configuredApiBaseUrl ?? "").replace(/\/+$/u, "");
 const contactFallbackMessage =
   "Hiện tại hệ thống đang được nâng cấp. Vui lòng liên hệ support@qts.com.vn hoặc hotline +84 24 7300 0888.";
 
@@ -56,6 +57,7 @@ const fieldNames: FieldName[] = [
   "email",
   "phone",
   "message",
+  "privacyConsent",
 ];
 const fieldLabels: Record<FieldName, string> = {
   problemType: "Bài toán cần giải quyết",
@@ -64,6 +66,7 @@ const fieldLabels: Record<FieldName, string> = {
   email: "Email",
   phone: "Số điện thoại",
   message: "Mô tả",
+  privacyConsent: "Đồng ý xử lý dữ liệu",
 };
 const fieldControlIds: Record<FieldName, string> = {
   problemType: "problemType-cybersecurity",
@@ -72,8 +75,9 @@ const fieldControlIds: Record<FieldName, string> = {
   email: "email",
   phone: "phone",
   message: "message",
+  privacyConsent: "privacyConsent",
 };
-const maximumDescriptionLength = 4800;
+const maximumDescriptionLength = 4500;
 
 function isCreatedLeadResponse(value: unknown): value is CreatedLeadResponse {
   if (typeof value !== "object" || value === null || !("data" in value)) return false;
@@ -135,8 +139,12 @@ function validateField(name: FieldName, rawValue: string): string | undefined {
   if (name === "message") {
     if (value.length < 10) return "Vui lòng mô tả vấn đề bằng ít nhất 10 ký tự.";
     if (value.length > maximumDescriptionLength) {
-      return "Nội dung không được vượt quá 4.800 ký tự.";
+      return "Nội dung không được vượt quá 4.500 ký tự.";
     }
+  }
+
+  if (name === "privacyConsent" && value !== "accepted") {
+    return "Vui lòng xác nhận bạn đã đọc thông báo quyền riêng tư.";
   }
 
   return undefined;
@@ -158,7 +166,6 @@ export function ContactForm() {
   const [showErrorSummary, setShowErrorSummary] = useState(false);
   const errorSummaryRef = useRef<HTMLDivElement>(null);
   const isSubmitting = submission.kind === "submitting";
-  const isContactAvailable = apiBaseUrl.length > 0;
 
   function handleBlur(event: FocusEvent<HTMLInputElement | HTMLTextAreaElement>) {
     const name = event.currentTarget.name as FieldName;
@@ -199,14 +206,6 @@ export function ContactForm() {
     }
 
     setShowErrorSummary(false);
-    if (!isContactAvailable) {
-      setSubmission({
-        kind: "error",
-        message: contactFallbackMessage,
-      });
-      return;
-    }
-
     setSubmission({ kind: "submitting" });
 
     try {
@@ -215,8 +214,10 @@ export function ContactForm() {
         email: values.email,
         phone: values.phone,
         message: buildQualifiedMessage(values),
+        privacyConsent: true,
+        privacyNoticeVersion: PRIVACY_NOTICE_VERSION,
       };
-      const response = await fetch(`${apiBaseUrl}/api/contact`, {
+      const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -484,52 +485,59 @@ export function ContactForm() {
           role={errors.message ? "alert" : undefined}
           className={`contact-field__message ${errors.message ? "text-qts-error" : "text-qts-muted"}`}
         >
-          {errors.message ?? "Từ 10 đến 4.800 ký tự."}
+          {errors.message ?? "Từ 10 đến 4.500 ký tự."}
         </p>
       </fieldset>
 
-      <div className="contact-form__footer">
-        <p className="contact-form__legal body-wrap">
-          Thông tin của bạn được bảo mật. Đội ngũ QTS sẽ phản hồi trong vòng 24 giờ làm việc.
-        </p>
-        {isContactAvailable ? (
-          <button
-            type="submit"
+      <div className="contact-consent">
+        <label htmlFor="privacyConsent">
+          <input
+            id="privacyConsent"
+            name="privacyConsent"
+            type="checkbox"
+            value="accepted"
+            required
             disabled={isSubmitting}
-            className="qts-button contact-form__submit inline-flex min-h-12 shrink-0 items-center justify-center gap-2 px-5 font-semibold"
-          >
-            {isSubmitting ? (
-            <>
-              <CircleNotch size={19} weight="bold" className="animate-spin" aria-hidden="true" />
-              Đang gửi
-            </>
-            ) : (
-            <>
-              <PaperPlaneTilt size={19} weight="bold" aria-hidden="true" />
-              Gửi yêu cầu tư vấn
-            </>
-            )}
-          </button>
-        ) : (
-          <a
-            href="mailto:support@qts.com.vn"
-            className="qts-button contact-form__submit inline-flex min-h-12 shrink-0 items-center justify-center gap-2 px-5 font-semibold"
-          >
-            <EnvelopeSimple size={19} weight="bold" aria-hidden="true" />
-            Trao đổi trực tiếp
-          </a>
-        )}
+            aria-invalid={Boolean(errors.privacyConsent)}
+            aria-describedby="contact-form-privacy privacyConsent-error"
+            onChange={() => clearFieldError("privacyConsent")}
+          />
+          <span>
+            Tôi đã đọc <Link href="/quyen-rieng-tu" target="_blank" rel="noopener noreferrer">Thông báo quyền riêng tư</Link> và đồng ý để QTS xử lý thông tin nhằm phản hồi yêu cầu này.
+          </span>
+        </label>
+        <p id="privacyConsent-error" role={errors.privacyConsent ? "alert" : undefined} className="contact-field__message text-qts-error">
+          {errors.privacyConsent ?? ""}
+        </p>
+      </div>
+
+      <div className="contact-form__footer">
+        <p id="contact-form-privacy" className="contact-form__legal body-wrap">
+          QTS chỉ dùng thông tin để xử lý yêu cầu và phối hợp phản hồi. Bạn có thể yêu cầu truy cập, chỉnh sửa hoặc xóa dữ liệu qua support@qts.com.vn.
+        </p>
+        <Button
+          type="submit"
+          disabled={isSubmitting}
+          size="lg"
+          className="contact-form__submit"
+          aria-label={isSubmitting ? "Đang gửi yêu cầu tư vấn" : "Gửi yêu cầu tư vấn đến QTS"}
+          aria-describedby="contact-form-privacy"
+        >
+          {isSubmitting ? (
+          <>
+            <CircleNotch size={19} weight="bold" className="animate-spin" aria-hidden="true" />
+            Đang gửi
+          </>
+          ) : (
+          <>
+            <PaperPlaneTilt size={19} weight="bold" aria-hidden="true" />
+            Gửi yêu cầu tư vấn
+          </>
+          )}
+        </Button>
       </div>
 
       <div className="contact-form__status" aria-live="polite" aria-atomic="true">
-        {submission.kind === "idle" && !isContactAvailable ? (
-          <div role="status" className="contact-status contact-status--notice">
-            <WarningCircle size={22} weight="fill" className="mt-0.5 shrink-0" aria-hidden="true" />
-            <p>
-              Hiện tại hệ thống đang được nâng cấp. Vui lòng liên hệ <a href="mailto:support@qts.com.vn">support@qts.com.vn</a> hoặc <a href="tel:+842473000888">hotline +84 24 7300 0888</a>.
-            </p>
-          </div>
-        ) : null}
         {submission.kind === "success" ? (
           <div role="status" className="contact-status contact-status--success">
             <CheckCircle size={22} weight="fill" className="mt-0.5 shrink-0" aria-hidden="true" />

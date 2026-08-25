@@ -1,71 +1,26 @@
 ---
-name: QTS Public Website
-description: Enterprise engineering interface that makes complex digital systems visible, inspectable, and operable.
+name: QTS Enterprise Operating Platform
+description: A light enterprise platform built around visible system state, measurable operations, and calm technical authority.
 colors:
-  qts-navy-deep: "#07143d"
-  qts-navy: "#0b1f5c"
-  qts-navy-hover: "#123a9c"
-  interface-blue: "#3b82f6"
-  system-blue: "#5ea7ff"
-  signal-blue: "#78c4ff"
-  signal-live: "#38d9ff"
-  paper: "#f5f8fc"
-  paper-blue: "#eaf2fb"
+  page: "#f6f9ff"
+  page-strong: "#f5f9ff"
   surface: "#ffffff"
-  ink: "#111a37"
-  muted-ink: "#52627a"
-  structural-border: "#b8cbe0"
-  milestone: "#4a62a0"
-  hero-text: "#ffffff"
-  project-art-paper: "#f1e4d1"
-  capability-field: "#f5f8fc"
-  capability-ink: "#0f172a"
-  capability-primary: "#1e40af"
-  capability-border: "#cbd5e1"
-  structural-rule: "rgb(11 31 92 / 16%)"
-  structural-rule-dark: "rgb(120 196 255 / 24%)"
-  navy-shadow-soft: "rgb(7 20 61 / 6%)"
-  navy-shadow: "rgb(7 20 61 / 14%)"
-  focus: "#3b82f6"
-  success: "#176b4d"
-  error: "#a12b35"
-  success-soft: "#edf8f3"
-  error-soft: "#fff1f2"
+  ink: "#071426"
+  muted: "#5f6d82"
+  border: "#dce7f4"
+  primary: "#2563eb"
+  primary-dark: "#1d4ed8"
+  primary-soft: "#eaf2ff"
+  cyan: "#22d3ee"
+  mint: "#4eddb3"
+  violet: "#b58af2"
+  amber: "#efb342"
+  pink: "#ef75a9"
 typography:
-  scale:
-    micro: "0.55rem"
-    technical: "0.625rem"
-    technical-large: "0.6875rem"
-    label: "0.75rem"
-    node: "0.8125rem"
-    small: "0.875rem"
-    caption: "0.9375rem"
-    body: "1rem"
-    hero-brand-mobile: "1.0625rem"
-    lead: "1.125rem"
-    subheading: "1.25rem"
-    capability-heading: "1.5rem"
-    mobile-heading: "1.35rem"
-    project-title: "1.625rem"
-    section-heading: "1.75rem"
-    hero-display-mobile-wide: "1.875rem"
-    capability-heading-large: "2rem"
-    story-number: "2.25rem"
-    workflow-number: "2.5rem"
-    story-number-large: "2.75rem"
-    workflow-number-large: "3rem"
-    hero-display-laptop: "3.25rem"
-    display-large: "3.5rem"
-    hero-display-desktop: "3.75rem"
   display:
     fontFamily: "Sora Variable, Be Vietnam Pro, Arial, sans-serif"
-    fontWeight: 700
+    fontWeight: 720
     lineHeight: 1.05
-    letterSpacing: "0"
-  headline:
-    fontFamily: "Sora Variable, Be Vietnam Pro, Arial, sans-serif"
-    fontWeight: 600
-    lineHeight: 1.1
     letterSpacing: "0"
   body:
     fontFamily: "Be Vietnam Pro, Arial, sans-serif"
@@ -73,165 +28,205 @@ typography:
     fontWeight: 400
     lineHeight: 1.6
     letterSpacing: "0"
-  lead:
-    fontFamily: "Be Vietnam Pro, Arial, sans-serif"
-    fontSize: "1.125rem"
-    fontWeight: 400
-    lineHeight: 1.6
-    letterSpacing: "0"
-  small:
-    fontFamily: "Be Vietnam Pro, Arial, sans-serif"
-    fontSize: "0.875rem"
-    fontWeight: 400
-    lineHeight: 1.5
-    letterSpacing: "0"
-  label:
-    fontFamily: "Be Vietnam Pro, Arial, sans-serif"
-    fontSize: "0.75rem"
-    fontWeight: 700
-    letterSpacing: "0.045em"
-  button:
-    fontFamily: "Be Vietnam Pro, Arial, sans-serif"
-    fontWeight: 700
-    lineHeight: 1.2
-    letterSpacing: "0"
 rounded:
-  square: "0px"
-  tag: "4px"
-  control: "6px"
-  card: "8px"
+  control: "8px"
+  compact: "12px"
+  card: "20px"
+  dashboard: "24px"
+  pill: "999px"
 spacing:
-  shell-mobile: "1.25rem"
-  shell-desktop: "4rem"
-  control-y: "0.75rem"
-  control-x: "1.25rem"
-  section-mobile: "4rem"
-  section-desktop: "7rem"
+  shell-mobile: "16px"
+  shell-desktop: "24px"
+  section-mobile: "84px"
+  section-desktop: "120px"
 components:
   button-primary:
-    backgroundColor: "{colors.qts-navy}"
+    backgroundColor: "{colors.primary}"
     textColor: "{colors.surface}"
-    typography: "{typography.button}"
     rounded: "{rounded.control}"
-    padding: "0.75rem 1.25rem"
-    height: "3rem"
-  button-primary-hover:
-    backgroundColor: "{colors.qts-navy-hover}"
-  form-input:
+    padding: "12px 19px"
+    height: "46px"
+  button-quiet:
+    backgroundColor: "transparent"
+    textColor: "{colors.primary-dark}"
+    rounded: "{rounded.control}"
+    padding: "12px 19px"
+    height: "46px"
+  feature-card:
     backgroundColor: "{colors.surface}"
     textColor: "{colors.ink}"
-    rounded: "{rounded.tag}"
-  system-map:
-    backgroundColor: "{colors.qts-navy-deep}"
-    textColor: "{colors.surface}"
-    rounded: "{rounded.square}"
-    border: "1px {colors.structural-rule-dark}"
-  project-record:
-    backgroundColor: "{colors.surface}"
-    textColor: "{colors.qts-navy-deep}"
-    rounded: "{rounded.tag}"
-    border: "1px {colors.structural-rule}"
+    rounded: "{rounded.card}"
+    padding: "23px"
+  dashboard:
+    backgroundColor: "rgba(255,255,255,0.76)"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.dashboard}"
+    padding: "19px"
 ---
+
+# Design System: QTS Enterprise Operating Platform
 
 ## Overview
 
-**Creative North Star: "Enterprise Digital Intelligence."** QTS presents operational work as a system that can be inspected, implemented, and improved. Architecture, integration, security, and operations are the visual identity rather than decorative technology imagery.
+**Creative North Star: "The Visible System"**
 
-**The Blueprint Rule.** Establish hierarchy with full-bleed system fields, ruled divisions, numbered steps, and purposeful rectangular modules before adding decoration. The landing page follows a Map / Diagram macrostructure: offer, system map, delivery method, capabilities, solution flows, technical project records, then contact.
+QTS presents enterprise technology as a system that can be seen, understood, and operated. The world is bright and precise: pale blue operating fields, white product surfaces, decisive dark typography, one primary blue action color, and restrained semantic accents. Product evidence leads; decoration stays secondary.
 
-**Key Characteristics:** square structural geometry; low-radius controls; solid navy blueprint fields; pale-blue reading surfaces; one-pixel topology; route-specific system diagrams; restrained reveal and data-flow motion; Sora and Be Vietnam Pro in defined roles.
+The visual character combines operational clarity, quiet SaaS restraint, and enterprise architecture depth. The homepage persuades through a live system center, connected operating flow, explicit targets, and local scenario artwork rather than generic consulting claims.
+
+**Key Characteristics:**
+
+- Dashboard-first product storytelling.
+- Security proof behaves like a control center, not a principle brochure.
+- Broad atmospheric blue depth without decorative gradient objects.
+- Compact technical labels paired with highly legible operating values.
+- Repeated cards only for capabilities, scenarios, and framed tools.
+- One connected signal motion with explicit pause behavior.
 
 ## Colors
 
-Primary colors are deep `#07143D` and navy `#0B1F5C` for structure, with `#123A9C`, `#3B82F6`, `#5EA7FF`, and `#78C4FF` for hierarchy. Paper `#F5F8FC`, pale blue `#EAF2FB`, and white carry reading surfaces. Cyan `#38D9FF` is reserved for live status, active nodes, data flow, focus, and hover feedback.
+The palette is a cool enterprise neutral system with one decisive blue voice and small functional accents.
 
-The implementation exposes stable palette aliases for shared UI work: `--qts-navy`, `--qts-navy-hover`, `--qts-navy-light`, `--qts-slate`, and `--qts-blue-accessory`. Components should consume these aliases rather than introducing page-local navy or blue values.
+### Primary
 
-**The Field-and-Marker Rule.** Use navy as a structural field, pale blue as a supporting field, and cyan only as a live marker. Keep paper and surface as the default reading planes; use ink and muted ink for text hierarchy. Warm paper may appear only inside the original project blueprint artwork and must not become a page theme.
+- **Operating Blue:** Primary buttons, active navigation, live data paths, and selected system nodes.
+- **Deep Operating Blue:** Hover states and high-emphasis links.
+- **Soft Operating Blue:** Quiet selected states, icon fields, and technical backgrounds.
 
-Structural borders organize sections, cards, galleries, and form partitions. Success and error colors appear only in contact-form feedback, paired with their soft background and darker text treatment.
+### Secondary
+
+- **Signal Cyan:** Data-flow and live-system emphasis.
+- **Healthy Mint:** Available, secure, verified, and completed states.
+- **Capability Accents:** Violet, amber, and pink distinguish categories without dominating the page.
+
+### Neutral
+
+- **System Ink:** Main headings, values, and authoritative labels.
+- **Operational Muted:** Supporting copy and metadata; it must retain readable contrast on white.
+- **Cool Page Field:** The default page environment.
+- **White Surface:** Product tools, capability cards, and case studies.
+- **Technical Rule:** Borders, separators, and grid structure.
+
+**The One Action Voice Rule.** Blue owns primary action and active state; semantic accents communicate status, not competing calls to action.
 
 ## Typography
 
-Sora carries semantic display headings at 600-700. Be Vietnam Pro carries body copy, labels, metadata, controls, and the brand statement at 400-800. Letter spacing is neutral for prose and headings; compact uppercase technical labels may use `0.045em` to `0.08em` tracking.
+**Display Font:** Sora Variable with Be Vietnam Pro and Arial fallbacks
+**Body Font:** Be Vietnam Pro with Arial fallback
 
-**The Operational Type Rule.** Sora supplies geometric authority while Be Vietnam Pro keeps Vietnamese text compact and legible. Technical microcopy may drop to the documented 9-11px range only inside stable diagrams, never for body content.
+**Character:** Sora gives platform headlines a geometric, engineered presence. Be Vietnam Pro keeps Vietnamese copy, metadata, navigation, and controls clear at operational densities.
+
+### Hierarchy
+
+- **Hero Display** (750, 55-71px desktop, 41-48px mobile, 1.02): short product promise only.
+- **Section Headline** (720, 32-44px, 1.12): major narrative transitions.
+- **Card Title** (700-750, 14-18px, 1.3): capabilities, nodes, and scenarios.
+- **Body** (400, 14-16px, 1.55-1.65): explanatory copy with restrained line length.
+- **Technical Label** (650-760, 10-12px, 1.35): system state and compact metadata; never shrink required proof below this range.
+
+**The Zero Tracking Rule.** Display and body text use zero letter spacing; only short system marks may use modest positive tracking.
 
 ## Layout
 
-The page shell is centered at a maximum of 88rem. It keeps 2rem side gutters by default and 4rem from 48rem upward; the landing hero tightens to 1.25-1.5rem gutters below 768px. Sections use 4rem vertical padding on mobile, 5rem at small sizes, and 7rem on large screens.
+The global shell is 1440px with 24px desktop gutters. Marketing content uses a narrower 1120-1216px field. The desktop hero uses an approximately 38/62 split so the system center is the dominant first-viewport proof. Major sections use 120px vertical rhythm; mobile compresses this to 84px.
 
-**The System Grid Rule.** Use broad, edge-aligned rectangular sections and visible border lines. On large screens, capability and content layouts expand into 12-column grids; they collapse to single-column stacks or concise two-column form rows on smaller screens.
+At 1024px the hero stacks while the dashboard remains readable. At 768px capabilities become a single-column accordion, the operating model becomes a vertical sequence, and architecture nodes use a two-column compact grid. The mobile narrative prioritizes hero, dashboard, trust metrics, capabilities, operating model, architecture, and scenarios. Every breakpoint must retain a page width equal to the viewport from 320px upward.
 
-Headings and labels use `.display-wrap` behavior in implementation so long Vietnamese content can wrap without horizontal overflow. Header navigation overlays the landing hero, becomes a solid white field on internal routes or after scroll, and compresses from 6rem to 4.5rem. Below large screens, navigation becomes a conditionally rendered modal drawer. The document reserves 5.5rem of scroll padding below the fixed header; anchored targets use a 6rem scroll margin.
+**The Product Before Proof Rule.** The visitor sees the operating dashboard before supporting metrics, capabilities, or case studies.
 
 ## Elevation & Depth
 
-The system is flat by default. Surfaces are differentiated through navy, pale blue, paper, white, and structural borders. A restrained shadow is allowed only on command buttons and the contact form where separation improves usability.
+Depth is reserved for framed product tools and actionable repeated cards. The system center uses a broad blue-tinted ambient shadow and translucent white material; feature and scenario cards use low, quiet elevation at rest and a small lift on hover. Page sections themselves remain unframed bands.
 
-**The Flat Field Rule.** Structural borders and color fields create depth. System maps, the partner rail, stories, records, and footer remain flat; do not introduce glass, nested cards, gradient blobs, or a broad elevation scale.
+### Shadow Vocabulary
 
-Hero depth comes from a solid navy field, quarter-grid rules, live connectors, and a responsive Business -> Data / Integration / Security -> Operations topology. Project diagrams keep their accessible original blueprint artwork without decorative hover scaling.
+- **Product Lift** (`0 34px 90px rgb(45 77 132 / 17%)`): live dashboard and primary operating tools.
+- **Card Rest** (`0 8px 30px rgb(66 94 140 / 6%)`): capabilities, reliability proof, and scenarios.
+- **Card Hover** (`0 20px 48px rgb(66 94 140 / 11%)`): interactive repeated cards only.
+
+**The Framed Tool Rule.** Glass and deep shadow identify an operable product surface, not a generic page section.
 
 ## Shapes
 
-Structural modules and status blocks use a 0px radius. Form fields and records use 4px, command controls use 6px, and isolated cards may use at most 8px. The partner rail and system diagrams stay square. Borders are 1px except deliberate 2px focus and active cues.
-
-**The Controlled Geometry Rule.** Keep page structure, data rows, and operational modules square. Avoid pills, nested cards, oversized rounded containers, and decorative circular controls.
+Controls use restrained 8px corners. Compact status surfaces use 12px. Capability and scenario cards use 20px. The primary live dashboard and operating model use 24px. Pills are reserved for status and compact category markers. Thin cool borders keep the system structured without adding visual weight.
 
 ## Components
 
-### Buttons and Links
+### Buttons
 
-Primary actions use a solid navy or white fill, bold text, a 6px radius, and at least a 3rem height. The landing hero uses one white action with navy text: `Khám phá năng lực`. Secondary editorial links remain text plus an arrow and a structural underline. Hover changes border or fill without decorative gradients; active states compress slightly.
+- **Primary:** Operating Blue, white text, 8px radius, 46px minimum height, icon plus concise command.
+- **Quiet:** Transparent surface, Deep Operating Blue text, and the same stable height.
+- **Hover / Focus:** Darken or introduce Soft Operating Blue; keep visible focus outlines and avoid layout movement.
 
-**The Decisive Action Rule.** Reserve filled buttons for meaningful forward movement. The first viewport has one priority action only; navigation does not add a competing filled CTA.
+### Navigation
 
-### Cards and Project Media
+- Fixed translucent header with one active underline and one primary CTA.
+- Desktop order is Platform, Solutions, Architecture, Case Studies, Pricing.
+- Mobile uses a 48px icon menu button, focus trap, and numbered full-width links.
 
-Landing capabilities form one connected four-layer system map. Project records use a stable document layout with an `8 / 5` architecture diagram on mobile and a full-height media column on desktop, followed by technology tags, three icon-led metrics, and native disclosure. Records use a white surface, 1px rule, 4px radius, and no card shadow. Scope and target values never count up because they are not live or verified KPIs. Project records stay anonymous, carry an illustration/metric caveat, and never imply verified business outcomes.
+### Live System Dashboard
 
-### Capability Stack
+- White glass surface with System Health, four required state rows, and border-separated metrics.
+- Desktop keeps a horizontal health trace; mobile reflows state and metric rows rather than shrinking proof.
+- Status dots and progress paths are semantic accents, not decorative objects.
 
-The detailed capability route is an ordered Architecture Layers stack, not a card grid and not a timeline. Four flush layers use `01 / 04` identity, a 48px monochrome line-icon container, a Sora title with one short rule, and separate outcome lists labeled `Phạm vi` and `Đầu ra`. The stack uses `#F8FAFC`, `#0F172A`, `#1E40AF`, and `#CBD5E1` as its local enterprise field. A 4% blueprint grid is allowed because the surface is explicitly an architecture model. Hover and fragment-target states draw one 2px left accent, strengthen the icon, and emphasize the lists without lifting the row or implying clickability. Each layer reveals its number, icon, summary, and lists at 0/100/200/300ms with 600ms exponential ease-out; reduced motion is fully static. Below 768px the identity becomes a compact horizontal header and the two lists stack; from 768px they form two columns below the summary; the full four-track layer begins only at 1200px.
+### Capability Cards
 
-### Workflow Journey
+- Six cards in a 3-by-2 desktop grid with compact icon fields.
+- Desktop summaries are static headings. Mobile summaries become real disclosure buttons with visible expanded state.
 
-The landing workflow is a four-stage horizontal journey on `#F8FAFC`: `Khảo sát → Blueprint → Triển khai → Vận hành`. One continuous `rgba(15,23,42,0.12)` rail joins the stages, while a navy progress stroke draws from the rail start to the viewport-active node. Large `#B8C3D8` 48px milestone numbers act as visual anchors; monochrome Phosphor light icons use MagnifyingGlass, Blueprint, CloudArrowUp, and Pulse. Each stage ends with a compact `Đầu ra` row and directional marker. Pointer hover temporarily supersedes viewport emphasis so only one stage is visually active; stages never lift or behave like clickable cards. Below 768px the same semantic list becomes a vertical timeline without horizontal scrolling or DOM reordering. Stages reveal at 100ms intervals and reduced motion presents the complete journey immediately.
+### Operating Model
 
-### Solution Story
+- Five connected nodes inside one framed tool.
+- Auto-advance includes a pause control, stops after manual node selection, and disables live announcements while playing.
+- Reduced-motion preferences remove automatic and connector motion.
 
-The landing solution section is a light architecture document, not a dark card wall. Each record uses an identity rail, an authored problem statement, and a four-node data pipeline on wide screens. Pale blue fields, 4px corners, 1px rules, and monochrome Phosphor line icons match the technical reference without introducing decorative dashboards. Below 1344px the pipeline becomes a vertical flow; below 768px the identity rail becomes a compact horizontal header without horizontal page scrolling.
+### QTS Operating Architecture
 
-Rows enter once with a 600ms fade-and-20px rise using `cubic-bezier(.16,1,.3,1)`. Numbers reveal at 100ms, authored headline lines begin at 150ms, pipeline content begins at 250ms, and the outcome rule draws before its text. The viewport-active row replays a sequential node-and-connector signal at 700ms intervals; inactive rows retain full text contrast and only mute their structural accents. Node hover changes border, background, and icon emphasis in 200ms without lift. Reduced motion presents every record, line, node, connector, and outcome immediately.
+- The former consulting-style solution cards are replaced by one product console: \`One architecture. Four operating layers.\`.
+- The console pairs an upward Architecture Map, active-layer detail, and a \`LIVE ARCHITECTURE VIEW\`.
+- Foundation, Integration, Security, and Operations use status, capabilities, metrics, and explicit reference labels.
+- System modules expose continuous flows such as \`Source → Integrate → Govern → Serve\`; stages stay on one line at every supported breakpoint.
+- Layer signal motion has a visible 44px pause/play control and stops under reduced motion.
 
-### Forms and Feedback
+### Security Control Center
 
-Inputs and textareas are white, square, and border-led. Focus shifts the border/ring toward navy while the global focus-visible outline remains explicit; disabled fields preserve shape and become unavailable through cursor and opacity. The contact form uses success, error, and unavailable status blocks with matching semantic colors and live announcements.
+- A glass control center pairs a model security score and four system states with a five-stage control map.
+- User-supplied demonstration values stay visibly qualified as `Model data`, `Reference`, `Example`, or `Sample`.
+- Desktop evidence uses four dashboard cards; mobile converts them to native disclosure buttons.
+- The animated control path has a 44px pause/play target and is disabled under reduced motion.
 
-### Navigation and Disclosure
+### Scenario Cards
 
-The header uses one compact navigation row with three triggers opening full-width mega panels: Năng lực, Giải pháp, and Dự án. The single “Trao đổi với QTS” action owns the project-conversation path; there is no competing Contact navigation item. The header is transparent over the landing hero and solid white on internal routes or after scroll. Desktop navigation uses a cyan underline on dark and QTS blue on light. Mobile mounts a labelled modal drawer only while open, traps focus, closes on Escape, restores focus, and locks body scroll. Solution and project disclosures use native square `details` rows.
+- Local technical artwork leads each card.
+- Challenge, Solution, and Result remain visually distinct.
+- Results must stay technical scope or explicitly labeled targets.
 
-### Motion and Accessibility
+### Pricing
 
-Motion uses native CSS and small IntersectionObservers. Sections reveal once with transform-led movement while content remains readable before the observer fires. Topology connectors and active signals loop gently; the fifth solution stage is sequenced with the first four. The partner strip is the only continuous data rail and its duplicate is hidden from assistive technology. Keyboard focus uses a visible blue/cyan outline. Reduced motion removes spatial movement while preserving all content and architecture.
-
-Partner marks use local assets inside one flat, square, keyboard-scrollable rail. They stay normalized with `object-fit: contain`, muted grayscale by default, and stronger contrast on pointer hover. Publication requires brand approval and never implies unverified client proof.
+- Pricing communicates three engagement models: Architecture Assessment, Platform Delivery, and Managed Operations.
+- Commercial structure is expressed as custom scope, with assumptions and third-party costs separated.
+- Comparison uses a semantic table on desktop and labeled stacked rows on mobile.
+- FAQ uses native `details` and `summary` disclosure behavior.
 
 ## Do's and Don'ts
 
 ### Do:
 
-- **Do** use Sora 700/600 for display headings and Be Vietnam Pro 400-800 for body, labels, metadata, and controls.
-- **Do** build pages from navy structural fields, pale signal-blue support planes, paper/surface reading planes, and 1px borders.
-- **Do** use square structural modules, 4-8px corners, clear focus outlines, responsive stacking, and the 88rem shell.
-- **Do** keep the topology-led navy hero, cyan data signal, authored three-line title, and reduced-motion behavior.
+- **Do** lead with real product UI or local system artwork.
+- **Do** preserve visible labels such as `target` for unverified performance numbers.
+- **Do** qualify security demonstrations as model, reference, example, or sample data.
+- **Do** show architecture as an operating console with selectable layers and explicit system states.
+- **Do** explain pricing through scope drivers when no approved rates exist.
+- **Do** keep required dashboard state readable on mobile.
+- **Do** use motion to explain system flow and provide a pause mechanism.
+- **Do** use full-page bands and constrained inner shells.
 
 ### Don't:
 
-- **Don't** add rounded pills, glass, decorative gradients, nested cards, gradient blobs, or a broad shadow vocabulary.
-- **Don't** add customer logos, testimonials, certification badges, leadership profiles, or quantified outcomes until each item has an approved source.
-- **Don't** replace the operational narrative with a generic SaaS dashboard, equal-card wall, or centered stock hero.
-- **Don't** use motion that bypasses `prefers-reduced-motion`, hides keyboard focus, or makes navigation states ambiguous.
-- **Don't** let long Vietnamese display text create horizontal overflow at the 320px support floor.
+- **Don't** use unapproved customer logos, testimonials, certifications, or business outcomes.
+- **Don't** invent prices, discounts, certifications, or live security performance.
+- **Don't** add a standalone `Liên hệ` navigation item; conversion language is `Trao đổi với QTS`.
+- **Don't** stack decorative cards inside cards or turn every section into a floating panel.
+- **Don't** add discrete gradient orbs, bokeh, generic stock technology imagery, or ornamental diagrams.
+- **Don't** shrink operational proof to make the mobile dashboard fit; reflow it.

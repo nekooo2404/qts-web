@@ -1,0 +1,41 @@
+name: Frontend Client
+
+on:
+  pull_request:
+    paths:
+      - "frontend-client/**"
+      - ".github/workflows/frontend-client.yml"
+  push:
+    branches: [main]
+    paths:
+      - "frontend-client/**"
+      - ".github/workflows/frontend-client.yml"
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend-client
+    env:
+      BACKEND_API_URL: http://127.0.0.1:9
+      CMS_FALLBACK_MODE: fixture
+      CMS_FETCH_ATTEMPTS: 1
+      SITE_URL: http://127.0.0.1:3100
+      NEXT_PUBLIC_APP_RELEASE: ${{ github.sha }}
+      CONTACT_RETENTION_DAYS: 180
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: frontend-client/package-lock.json
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run lint
+      - run: npm test
+      - run: npm run check:budget
+      - run: npm run build
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e

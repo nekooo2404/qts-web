@@ -7,7 +7,7 @@ interface PageIntroProps {
 }
 export function PageIntro({ title, description, variant }: PageIntroProps) {
   return (
-    <section className={`route-intro route-intro--${variant} qts-dark bg-qts-deep`}>
+    <section data-scroll-reveal="section" className={`route-intro route-intro--${variant} qts-dark bg-qts-deep`}>
       <div className="page-shell route-intro__grid">
         <div className="route-intro__copy">
           <h1 className="display-wrap route-intro__title">
